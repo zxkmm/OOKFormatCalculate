@@ -6,3 +6,7 @@ JS+HTML web app is OTW.
 e.g. H0FF1FHFHH0100<--->100001011101100110100100
 # i18n
 [中文](https://github.com/zxkmm/OOKFormatCalculate/blob/main/Chinese.md)
+# Credit
+[PickedItMate](https://github.com/pickeditmate)
+[jimilinuxguy](https://github.com/jimilinuxguy)
+[GoblinGe](https://github.com/GoblinGe)
