@@ -35,7 +35,6 @@ string DEC2anyBS(int n,int radix)    //n for decimal，radix for BS
     return ans;
 }
 
-
 /*
 manul string: src
 sub-string which is needed 2 be replaced: old_value
@@ -109,6 +108,3 @@ int main(){
         }
     }
 }
-    
-
-
