@@ -1,5 +1,5 @@
 # OOKFormatCalculate
-2262 etc. encoders is OTW.
+Other encoders is OTW.
 JS+HTML web app is OTW.
 # Usage
 ## 1527 4Bits data <---> 2Bits data
