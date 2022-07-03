@@ -7,7 +7,7 @@ JS+HTML web app is OTW.
 e.g.  
 H0FF1FHFHH0100<--->100001011101100110100100  
 ## 2262
-Demodulated waveform <---> 3Bits data 
+3Bits data ---> Demodulated waveform
 # Note  
 This repo is just a data/code/waveform calculator which mainly progressing strings, if you are looking for a tool to progress/demodulate raw files like ```.complex``` or ```.C16```, pls refer to these project below:  
 [URH](https://github.com/jopohl/urh)  
