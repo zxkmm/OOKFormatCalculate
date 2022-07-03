@@ -40,7 +40,7 @@ manul string: src
 sub-string which is needed 2 be replaced: old_value
 to: new_value
 */
-string& replace(string& src, const string& old_value, const string& new_value) {
+string& replace_mod(string& src, const string& old_value, const string& new_value) {
     // Anti-loooooooop
     for (string::size_type pos(0); pos != string::npos; pos += new_value.length()) {
         if ((pos = src.find(old_value, pos)) != string::npos) {
@@ -52,7 +52,7 @@ string& replace(string& src, const string& old_value, const string& new_value) {
 }
 
 int main(){
-    cout << "OOKFC running\n----\nPress 1 for 4Bits 1527 code to 2Bits\ne.g.H0FF1FHFHH>>10000101110110011010\n----\nPress 2 for 2Bits 1527 code to 4Bits\ne.g. 10000101110110011010>>H0FF1FHFHH\n----\nPress 3 for demodulated wave form of 2262 to 3Bits code\ne.g. NNNNWWNNNNNWNNNWNNNWNNNNS>>00100F0F0F00\n----\nPress 4 for 3Bits 2262 code to demodulated wave form\ne.g. 00100F0F0F00>>NNNNWWNNNNNWNNNWNNNWNNNNS\n----\nYour choice:";
+    cout << "OOKFC running\n----\nPress 1 for 4Bits 1527 code to 2Bits\ne.g.H0FF1FHFHH>>10000101110110011010\n----\nPress 2 for 2Bits 1527 code to 4Bits\ne.g. 10000101110110011010>>H0FF1FHFHH\n----\nPress 3 for 3Bits 2262 code to demodulated wave form(Kinda useless but i just put it here in case if someone really need it :))\ne.g. 00100F0F0F00>>NNNNWWNNNNNWNNNWNNNWNNNNS\n----\nYour choice:";
     int select;
     cin >> select;
     switch(select){
@@ -60,9 +60,9 @@ int main(){
             string i1527B4;
             cout << "OOKFC running\nInput 4Bits 1527 code(Without data code):";
             cin >> i1527B4;
-            replace(i1527B4, "1", "3");
-            replace(i1527B4, "F", "1");
-            replace(i1527B4, "H", "2");
+            replace_mod(i1527B4, "1", "3");
+            replace_mod(i1527B4, "F", "1");
+            replace_mod(i1527B4, "H", "2");
             cout  <<"2Bit of it is " + DEC2anyBS(anyBS2DEC(i1527B4, 4), 2) << "\n";
             break;
         }
@@ -71,34 +71,38 @@ int main(){
             cout << "Input 2Bits 1527 code(Without data code):";
             cin >> i1527B2;
             string o1527B4 = DEC2anyBS(anyBS2DEC(i1527B2, 2), 4);
-            replace(o1527B4, "1", "F");
-            replace(o1527B4, "3", "1");
-            replace(o1527B4, "2", "H");
+            replace_mod(o1527B4, "1", "F");
+            replace_mod(o1527B4, "3", "1");
+            replace_mod(o1527B4, "2", "H");
             cout  << "4Bit of it is " + o1527B4 << "\n";
             break;
         }
+//        case 3 : {
+//            string i2262WS;
+//            cout << "Input demodulated wave form of 2262 (Within sync code):\ne.g.\n";
+//            cout << "  -   -   --   --   -   --   -  \n";
+//            cout << " | | | | |  | |  | | | |  | | | \n";
+//            cout << "-   -   -    -    -   -    -   _\n";
+//            cout << "  N   N   W    W    N   W    S  \n";
+//            cin >> i2262WS;
+//            replace_mod(i2262WS, "WW", "1");
+//            replace_mod(i2262WS, "NW", "F");
+//            replace_mod(i2262WS, "NN", "0");
+//            replace_mod(i2262WS, "S", "");
+//            cout  << "3Bit of it is " + i2262WS << "\n";
+//            break;
+//        }
+//useless case Press 3 for demodulated wave form of 2262 to 3Bits code\ne.g. NNNNWWNNNNNWNNNWNNNWNNNNS>>00100F0F0F00\n----\n
         case 3 : {
-            string i2262WS;
-            cout << "Input demodulated wave form of 2262 (Within sync code):\ne.g.\n";
-            cout << "  -   -   --   --   -   --   -  \n";
-            cout << " | | | | |  | |  | | | |  | | | \n";
-            cout << "-   -   -    -    -   -    -   _\n";
-            cout << "  N   N   W    W    N   W    S  \n";
-            cin >> i2262WS;
-            replace(i2262WS, "NN", "0");
-            replace(i2262WS, "WW", "1");
-            replace(i2262WS, "NW", "F");
-            replace(i2262WS, "S", "");
-            cout  << "3Bit of it is " + i2262WS << "\n";
-            break;
-        }
-        case 4 : {
             string i2262B3;
             cout << "Input 3Bits 2262 code(Without data code):";
             cin >> i2262B3;
-            replace(i2262B3, "0", "NN");
-            replace(i2262B3, "1", "WW");
-            replace(i2262B3, "F", "NW");
+             {
+                replace_mod(i2262B3, "0", "NN");
+                replace_mod(i2262B3, "1", "WW");
+                replace_mod(i2262B3, "F", "NW");
+            }
+
             cout  << "demodulated wave form of it is " + i2262B3 + "S" + "\ne.g." << "\n";
             cout << "  N   N   W    W    N   W    S  \n";
             cout << "  -   -   --   --   -   --   -  \n";
