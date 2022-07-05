@@ -52,13 +52,13 @@ string& replace_mod(string& src, const string& old_value, const string& new_valu
 }
 
 int main(){
-    cout << "OOKFC running\n----\nPress 1 for 4Bits 1527 code to 2Bits\ne.g.H0FF1FHFHH>>10000101110110011010\n----\nPress 2 for 2Bits 1527 code to 4Bits\ne.g. 10000101110110011010>>H0FF1FHFHH\n----\nPress 3 for 3Bits 2262 code to demodulated wave form(Kinda useless but i just put it here in case if someone really need it :))\ne.g. 00100F0F0F00>>NNNNWWNNNNNWNNNWNNNWNNNNS\n----\nPress 4 for demodulated wave form to 3Bits 2262 code\n e.g. NNNNWWNNNNNWNNNWNNNWNNNNS>>00100F0F0F00\n----\nYour choice:";
+    cout << "OOKFC running\n----\nPress 1 for 4Bits 1527 code to 2Bits\ne.g.H0FF1FHFHH>>10000101110110011010\n----\nPress 2 for 2Bits 1527 code to 4Bits\ne.g. 10000101110110011010>>H0FF1FHFHH\n----\nPress 3 for 3Bits 2262 code to demodulated wave form(Kinda useless but i just put it here in case if someone really need it :))\ne.g. 00100F0F0F00>>NNNNWWNNNNNWNNNWNNNWNNNNS\n----\nPress 4 for demodulated wave form to 3Bits 2262 code\n e.g. NNNNWWNNNNNWNNNWNNNWNNNNS>>00100F0F0F00\n----\nPress 5 to exit\nYour choice:";
     int select;
     cin >> select;
     switch(select){
         case 1 : {
             string i1527B4;
-            cout << "OOKFC running\nInput 4Bits 1527 code(Without data code):";
+            cout << "OOKFC running\nInput 4Bits 1527 code(Without data code):\n>";
             cin >> i1527B4;
             replace_mod(i1527B4, "1", "3");
             replace_mod(i1527B4, "F", "1");
@@ -68,7 +68,7 @@ int main(){
         }
         case 2 : {
             string i1527B2;
-            cout << "Input 2Bits 1527 code(Without data code):";
+            cout << "Input 2Bits 1527 code(Without data code):\n>";
             cin >> i1527B2;
             string o1527B4 = DEC2anyBS(anyBS2DEC(i1527B2, 2), 4);
             replace_mod(o1527B4, "1", "F");
@@ -83,7 +83,7 @@ int main(){
             cout << "  -   -   --   --   -   --   -  \n";
             cout << " | | | | |  | |  | | | |  | | | \n";
             cout << "-   -   -    -    -   -    -   _\n";
-            cout << "  N   N   W    W    N   W    S  \n";
+            cout << "  N   N   W    W    N   W    S  \n>";
             cin >> i2262WS;
             replace_mod(i2262WS, "NN", "0");
             replace_mod(i2262WS, "NW", "F");
@@ -94,7 +94,7 @@ int main(){
         }
         case 4 : {
             string i2262B3;
-            cout << "Input 3Bits 2262 code(Without data code):";
+            cout << "Input 3Bits 2262 code(Without data code):\n>";
             cin >> i2262B3;
             replace_mod(i2262B3, "0", "NN");
             replace_mod(i2262B3, "1", "WW");
@@ -104,6 +104,9 @@ int main(){
             cout << "  -   -   --   --   -   --   -  \n";
             cout << " | | | | |  | |  | | | |  | | | \n";
             cout << "-   -   -    -    -   -    -   _\n";
+            break;
+        }
+        case 5 :{
             break;
         }
     }
