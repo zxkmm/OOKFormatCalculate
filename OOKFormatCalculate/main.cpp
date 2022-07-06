@@ -22,9 +22,9 @@ int anyBS2DEC(string s,int radix)    //s for incoming string, radix for it's BS
         return ans;
 }
 
-string DEC2anyBS(int n,int radix)    //n for incoming numbers(string)，radix for BS
+string DEC2anyBS(int n,int radix)    //n for incoming numbers(int)，radix for it's BS
 {
-    string ans="";
+    string ans = "";
     do{
         int t=n%radix;
         if(t>=0&&t<=9)    ans+=t+'0';
@@ -52,7 +52,9 @@ string& replace_mod(string& src, const string& old_value, const string& new_valu
 }
 
 int main(){
-    cout << "OOKFC running\n----\nPress 1 for 4Bits 1527 code to 2Bits\ne.g.H0FF1FHFHH>>10000101110110011010\n----\nPress 2 for 2Bits 1527 code to 4Bits\ne.g. 10000101110110011010>>H0FF1FHFHH\n----\nPress 3 for 3Bits 2262 code to demodulated wave form(Kinda useless but i just put it here in case if someone really need it :))\ne.g. 00100F0F0F00>>NNNNWWNNNNNWNNNWNNNWNNNNS\n----\nPress 4 for demodulated wave form to 3Bits 2262 code\n e.g. NNNNWWNNNNNWNNNWNNNWNNNNS>>00100F0F0F00\n----\nPress 5 to exit\nYour choice:";
+    cout << "OOKFC running\n----\nPress 1 for 4Bits 1527 code to 2Bits\ne.g.H0FF1FHFHH>>10000101110110011010\n----\nPress 2 for 2Bits 1527 code to 4Bits\ne.g. 10000101110110011010>>H0FF1FHFHH\n----\nPress 3 for 3Bits 2262 code to demodulated wave form\n(Kinda useless but i just put it here in case if someone really need it :))\ne.g. 00100F0F0F00>>NNNNWWNNNNNWNNNWNNNWNNNNS\n----\nPress 4 for demodulated wave form to 3Bits 2262 code\n e.g. NNNNWWNNNNNWNNNWNNNWNNNNS>>00100F0F0F00\n----\nPress 5 to exit\n";
+    startplce:
+    cout << "Your choice:\n>";
     int select;
     cin >> select;
     switch(select){
@@ -64,7 +66,9 @@ int main(){
             replace_mod(i1527B4, "F", "1");
             replace_mod(i1527B4, "H", "2");
             cout  <<"2Bit of it is " + DEC2anyBS(anyBS2DEC(i1527B4, 4), 2) << "\n";
-            break;
+//            break;
+            cout << "backing to main menu::\n----\nmain menu\n----\n";
+            goto startplce;
         }
         case 2 : {
             string i1527B2;
@@ -75,7 +79,9 @@ int main(){
             replace_mod(o1527B4, "3", "1");
             replace_mod(o1527B4, "2", "H");
             cout  << "4Bit of it is " + o1527B4 << "\n";
-            break;
+//            break;
+            cout << "backing to main menu::\n----\nmain menu\n----\n";
+            goto startplce;
         }
         case 3 : {
             string i2262WS;
@@ -90,7 +96,9 @@ int main(){
             replace_mod(i2262WS, "WW", "1");
             cout << i2262WS;
             cout  << "3Bit of it is " + i2262WS << "\n";
-            break;
+//            break;
+            cout << "backing to main menu::\n----\nmain menu\n----\n";
+            goto startplce;
         }
         case 4 : {
             string i2262B3;
@@ -104,7 +112,9 @@ int main(){
             cout << "  -   -   --   --   -   --   -  \n";
             cout << " | | | | |  | |  | | | |  | | | \n";
             cout << "-   -   -    -    -   -    -   _\n";
-            break;
+//            break;
+            cout << "backing to main menu::\n----\nmain menu\n----\n";
+            goto startplce;
         }
         case 5 :{
             break;
