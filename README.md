@@ -17,7 +17,7 @@ This repo is just a data/code/waveform calculator which mainly progressing strin
 [URH](https://github.com/jopohl/urh)  
 [rtl-433](https://github.com/merbanan/rtl_433)  
 [ooktools](https://github.com/leonjza/ooktools) 
-[RFQuack](https://github.com/rfquack/RFQuack)
+[RFQuack](https://github.com/rfquack/RFQuack)  
 If you are trying to brute force an OOK device, please try these project below:  
 [OpenSesame](https://github.com/samyk/opensesame)  
 [PortapackMayhem](https://github.com/eried/portapack-mayhem)  
