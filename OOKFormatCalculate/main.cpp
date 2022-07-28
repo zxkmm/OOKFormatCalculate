@@ -86,9 +86,10 @@ int main(){
         case 3 : {
             string i2262WS;
             cout << "Input demodulated wave form of 2262 (WithOUT sync code):\ne.g.\n";
-            cout << "  -   -   --   --   -   --   -  \n";
-            cout << " | | | | |  | |  | | | |  | | | \n";
-            cout << "-   -   -    -    -   -    -   _\n";
+//            cout << "  ─   ─   ──   ──   ─   ──   ─  \n";
+            cout << " ┌─┐ ┌─┐ ┌──┐ ┌──┐ ┌─┐ ┌──┐ ┌─┐ \n";
+            cout << " │ │ │ │ │  │ │  │ │ │ │  │ │ │ \n";
+            cout << "─┘ └─┘ └─┘  └─┘  └─┘ └─┘  └─┘ └─\n";
             cout << "  N   N   W    W    N   W    S  \n>";
             cin >> i2262WS;
             replace_mod(i2262WS, "NN", "0");
@@ -109,9 +110,9 @@ int main(){
             replace_mod(i2262B3, "F", "NW");
             cout  << "demodulated wave form of it is " + i2262B3 + "S" + "\ne.g." << "\n";
             cout << "  N   N   W    W    N   W    S  \n";
-            cout << "  -   -   --   --   -   --   -  \n";
-            cout << " | | | | |  | |  | | | |  | | | \n";
-            cout << "-   -   -    -    -   -    -   _\n";
+            cout << " ┌─┐ ┌─┐ ┌──┐ ┌──┐ ┌─┐ ┌──┐ ┌─┐ \n";
+            cout << " │ │ │ │ │  │ │  │ │ │ │  │ │ │ \n";
+            cout << "─┘ └─┘ └─┘  └─┘  └─┘ └─┘  └─┘ └─\n";
 //            break;
             cout << "backing to main menu::\n----\nmain menu\n----\n";
             goto startplce;
