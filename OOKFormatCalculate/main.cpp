@@ -3,7 +3,7 @@
 //  OOKFormatCalculate
 //
 //  Created by zxkmm on 2022/6/26.
-//
+//  I wrote trash....
 
 #include <iostream>
 #include <string>
