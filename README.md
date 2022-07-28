@@ -13,10 +13,11 @@ e.g.
 ### About the sync code
 There is a sync code in the end of each frame of 2262 Signal, PLS note that you should manually ignore a narrow wave crest in the end when inputing your 2 Bits 2262 data.
 # Note  
-This repo is just a data/code/waveform calculator which mainly progressing strings, if you are looking for a tool to progress/demodulate raw files like ```.complex``` or ```.C16```, pls refer to these project below:  
+This repo is just a data/code/waveform calculator which mainly progressing strings, if you are looking for a tool to progress/demodulate raw files/ HEX datas like ```.complex``` or ```.C16```or data from [URH](https://github.com/jopohl/urh), pls refer to these project below:  
 [URH](https://github.com/jopohl/urh)  
 [rtl-433](https://github.com/merbanan/rtl_433)  
-[ooktools](https://github.com/leonjza/ooktools)  
+[ooktools](https://github.com/leonjza/ooktools) 
+[RFQuack](https://github.com/rfquack/RFQuack)  
 If you are trying to brute force an OOK device, please try these project below:  
 [OpenSesame](https://github.com/samyk/opensesame)  
 [PortapackMayhem](https://github.com/eried/portapack-mayhem)  
