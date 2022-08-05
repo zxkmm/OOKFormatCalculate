@@ -51,6 +51,65 @@ string& replace_mod(string& src, const string& old_value, const string& new_valu
     return src;
 }
 
+
+        
+
+string makeShortestGrain(int numOfGrain){//传入粒度的个数，例如4，然后传出粒度的string，例如1111
+    string stringGrain = "1";
+    for ( ; numOfGrain > 1; numOfGrain --) {
+        //制造grain字符串, 例如grainNum值为4则制造赋值stringGrain = "1111"
+        stringGrain = stringGrain + "1" ;
+    }
+//    string stringGrain;
+//    stringGrain = to_string(stringGrainInInt);
+    return stringGrain;
+}
+
+
+string detectShortestGrainSize(string dataFromURH){
+//查看来自URH的数据里面高电平的粒度是什么，例如是不是1111，从10个1开始找
+    int tes1t;
+    for (tes1t = 10; tes1t > 0; tes1t --) {
+        
+        if (dataFromURH.find(makeShortestGrain(tes1t)) != string::npos)
+        {
+            cout << makeShortestGrain(tes1t) << endl;
+            //如果找到
+            break;
+            
+            //返回高电平信号位的在URH显示的1的个数
+        }
+    }
+    
+    return makeShortestGrain(tes1t);
+}
+
+string decode2262FromURH(string dataFromURH){
+    string result3Bit2262Code;
+    //TODO
+    
+    
+    return result3Bit2262Code;
+}
+
+
+//int detectShortestGrainSize(string dataFromURH){ //探测URH数据传过来的二进制字符串的最小粒度
+//    int minGrain = 1;
+//    for (int grainNum = 10; grainNum == 0; grainNum --) {
+//        for (int realGrainNum = grainNum; realGrainNum == 0; realGrainNum --) {  //制造grain字符串, 例如grainNum值为4则制造赋值stringGrain = "1111"
+//            int stringGrainInInt = 1;
+//            stringGrainInInt = stringGrainInInt ++;
+//            if (stringGrainInInt > 1) {
+//                string stringGrain = to_string(stringGrainInInt);
+//                break;
+//            }
+//        }
+//
+//        //查找存不存在诸如1111的字符串在dataFromURH中，如果存在，则返回处理完的字符串即realGrainNum
+//    }
+//    return minGrain;
+//}
+
 int main(){
     cout << "OOKFC running\n----\nPress 1 for 4Bits 1527 code to 2Bits\ne.g.H0FF1FHFHH>>10000101110110011010\n----\nPress 2 for 2Bits 1527 code to 4Bits\ne.g. 10000101110110011010>>H0FF1FHFHH\n----\nPress 3 for 3Bits 2262 code to demodulated wave form\n(Kinda useless but i just put it here in case if someone really need it :))\ne.g. 00100F0F0F00>>NNNNWWNNNNNWNNNWNNNWNNNNS\n----\nPress 4 for demodulated wave form to 3Bits 2262 code\n e.g. NNNNWWNNNNNWNNNWNNNWNNNNS>>00100F0F0F00\n----\nPress 5 to exit\n";
     startplce:
@@ -87,10 +146,10 @@ int main(){
             string i2262WS;
             cout << "Input demodulated wave form of 2262 (WithOUT sync code):\ne.g.\n";
 //            cout << "  ─   ─   ──   ──   ─   ──   ─  \n";
-            cout << " ┌─┐ ┌─┐ ┌──┐ ┌──┐ ┌─┐ ┌──┐ ┌─┐ \n";
-            cout << " │ │ │ │ │  │ │  │ │ │ │  │ │ │ \n";
-            cout << "─┘ └─┘ └─┘  └─┘  └─┘ └─┘  └─┘ └─\n";
-            cout << "  N   N   W    W    N   W    S  \n>";
+            cout << " ┌┐ ┌┐ ┌──┐ ┌──┐ ┌┐ ┌──┐ ┌┐ \n";
+            cout << " ││ ││ │  │ │  │ ││ │  │ ││ \n";
+            cout << "─┘└─┘└─┘  └─┘  └─┘└─┘  └─┘└─\n";
+            cout << " N  N    W    W   N   W   S  \n>";
             cin >> i2262WS;
             replace_mod(i2262WS, "NN", "0");
             replace_mod(i2262WS, "NW", "F");
@@ -109,15 +168,18 @@ int main(){
             replace_mod(i2262B3, "1", "WW");
             replace_mod(i2262B3, "F", "NW");
             cout  << "demodulated wave form of it is " + i2262B3 + "S" + "\ne.g." << "\n";
-            cout << "  N   N   W    W    N   W    S  \n";
-            cout << " ┌─┐ ┌─┐ ┌──┐ ┌──┐ ┌─┐ ┌──┐ ┌─┐ \n";
-            cout << " │ │ │ │ │  │ │  │ │ │ │  │ │ │ \n";
-            cout << "─┘ └─┘ └─┘  └─┘  └─┘ └─┘  └─┘ └─\n";
+            cout << " N  N   W    W   N    W  S  \n";
+            cout << " ┌┐ ┌┐ ┌──┐ ┌──┐ ┌┐ ┌──┐ ┌┐ \n";
+            cout << " ││ ││ │  │ │  │ ││ │  │ ││ \n";
+            cout << "─┘└─┘└─┘  └─┘  └─┘└─┘  └─┘└─\n";
 //            break;
             cout << "backing to main menu::\n----\nmain menu\n----\n";
             goto startplce;
         }
         case 5 :{
+            //TODO
+        }
+        case 6 :{
             break;
         }
     }
