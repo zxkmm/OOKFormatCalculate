@@ -13,7 +13,7 @@ e.g.
 001FFF101FFF1<--->NNNNWWNWNWNWWWNNWWNWNWNWWW  
 100010001110111010001001001110100010001000100100010001000100011101110100010001000100010001000100---->010F000010000
 ### About the sync code
-There is a sync code in the end of each frame of 2262 Signal, PLS note that you should manually ignore a narrow wave crest in the end when inputing your 2 Bits 2262 data.
+There is a sync code in the end of each frame of 2262 Signal, PLS note that you should manually ignore a narrow wave crest in the end when inputing your 2 Bits 2262 data. I cannot resolve that part for you because URH always manufacts meaningless ``0`` so it is logically not possible to guess whether you input the sync signal.
 # Note  
 This repo is just a data/code/waveform calculator which mainly progressing strings, if you are looking for a tool to progress/demodulate raw files/ HEX datas like ```.complex``` or ```.C16```or data from [URH](https://github.com/jopohl/urh), pls refer to these project below:  
 [URH](https://github.com/jopohl/urh)  
