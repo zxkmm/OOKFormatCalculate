@@ -55,10 +55,10 @@ string& replace_mod(string& src, const string& old_value, const string& new_valu
 
 
 
-string makeShortestGrain(int numOfGrain){//传入粒度的个数，例如4，然后传出粒度的string，例如1111
+string makeShortestGrain(int numOfGrain){//the number of meaningless "0" in inut data，e.g. 4，then make a string with content "1111"
 				string stringGrain = "1";
 				for ( ; numOfGrain > 1; numOfGrain --) {
-								//制造grain字符串, 例如grainNum值为4则制造赋值stringGrain = "1111"
+								//make grain string, e.g. when grainNum=4 ,then make stringGrain = "1111".
 								stringGrain = stringGrain + "1" ;
 				}
 				//    string stringGrain;
@@ -68,6 +68,7 @@ string makeShortestGrain(int numOfGrain){//传入粒度的个数，例如4，然
 
 
 string detectShortestGrainSize(string dataFromURH){
+				//check how many meaningless "0" in the data from URH, e.g. 1111, then return 4(int). start looking since 10
 				//查看来自URH的数据里面高电平的粒度是什么，例如是不是1111，从10个1开始找
 				int tes1t;
 				for (tes1t = 10; tes1t > 0; tes1t --) {
@@ -76,9 +77,11 @@ string detectShortestGrainSize(string dataFromURH){
 								{
 												cout << makeShortestGrain(tes1t) << endl;
 												//如果找到
+												//If found
 												break;
 												
-												//返回高电平信号位的在URH显示的1的个数
+												//返回高电平信号位的在URH显示的1的个数 TODO
+												//return number of meaningless "1", since clock doesn't matter for this tool.
 								}
 				}
 				
@@ -120,14 +123,22 @@ startplce:
 				switch(select){
 								case 1 : {
 												string i1527B4;
+												string o1527B2;
 												cout << "OOKFC running\nInput 4Bits 1527 code(Without data code):\n>";
 												cin >> i1527B4;
 												replace_mod(i1527B4, "1", "3");
 												replace_mod(i1527B4, "F", "1");
 												replace_mod(i1527B4, "H", "2");
-												cout  <<"2Bit of it is " + DEC2anyBS(anyBS2DEC(i1527B4, 4), 2) << "\n";
+												o1527B2 = DEC2anyBS(anyBS2DEC(i1527B4, 4), 2);
+//												cout  <<"2Bit of it is " + DEC2anyBS(anyBS2DEC(i1527B4, 4), 2) << "\n";
+												
+												if (size(o1527B2)<20){//In case if the 4 base (4Bit) data started with 0;
+																for (unsigned long length = size(i1527B4); length < 19; length ++) {
+																				o1527B2 = "0" + o1527B2;
+																}
+												}
 												//            break;
-												cout << "backing to main menu::\n----\nmain menu\n----\n";
+												cout << o1527B2 + "\nbacking to main menu::\n----\nmain menu\n----\n";
 												goto startplce;
 								}
 								case 2 : {
@@ -184,15 +195,16 @@ startplce:
 												break;
 								}
 								case 7 :{//test
-												string test1 = "H0FF1FHFHH";
+												string test1 = "0000FH01HH";
 												replace_mod(test1, "1", "3");
 												replace_mod(test1, "F", "1");
 												replace_mod(test1, "H", "2");
-												cout << test1 ;
+												cout << test1;
 												cout << "\n";
 												cout << anyBS2DEC(test1, 4);
 												cout << "\n" ;
 												cout << DEC2anyBS(anyBS2DEC(test1, 4), 2);
+												cout << "\n";
 												
 								}
 				}
