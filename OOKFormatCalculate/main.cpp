@@ -8,11 +8,12 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include <sstream>
 
 using namespace std;
 
-int anyBS2DEC(string s,int radix)    //s for incoming string, radix for it's BS
-{
+int anyBS2DEC(string s,int radix){    //Any base to DEC. s for incoming string, radix for it's BS
+				
 				int ans=0;
 				for(int i=0;i<s.size();i++)
 				{
@@ -23,8 +24,8 @@ int anyBS2DEC(string s,int radix)    //s for incoming string, radix for it's BS
 				return ans;
 }
 
-string DEC2anyBS(int n,int radix)    //n for incoming numbers(int)，radix for it's BS
-{
+string DEC2anyBS(int n,int radix){    //DEC to any base. n for incoming numbers(int)，radix for it's BS
+				
 				string ans = "";
 				do{
 								int t=n%radix;
@@ -41,7 +42,7 @@ string DEC2anyBS(int n,int radix)    //n for incoming numbers(int)，radix for i
 	sub-string which is needed 2 be replaced: old_value
 	to: new_value
 	*/
-string& replace_mod(string& src, const string& old_value, const string& new_value) {
+string& replace_mod(string& src, const string& old_value, const string& new_value) {//Replace in my way, I hate using string::replace
 				// Anti-loooooooop
 				for (string::size_type pos(0); pos != string::npos; pos += new_value.length()) {
 								if ((pos = src.find(old_value, pos)) != string::npos) {
@@ -64,8 +65,7 @@ string makeShortestGrain(int numOfGrain){//the number of meaningless "0" in inut
 				//    string stringGrain;
 				//    stringGrain = to_string(stringGrainInInt);
 				return stringGrain;
-}
-
+}//TODO DEV
 
 string detectShortestGrainSize(string dataFromURH){
 				//check how many meaningless "0" in the data from URH, e.g. 1111, then return 4(int). start looking since 10
@@ -86,7 +86,7 @@ string detectShortestGrainSize(string dataFromURH){
 				}
 				
 				return makeShortestGrain(tes1t);
-}
+}//TODO DEV
 
 string decode2262FromURH(string dataFromURH){
 				string result3Bit2262Code;
@@ -95,6 +95,49 @@ string decode2262FromURH(string dataFromURH){
 				
 				return result3Bit2262Code;
 }
+
+string makeStringFullOf0withANumber(int numbersOf0){
+				string result = "";
+				string zero = "0";
+				for (;numbersOf0 > 0;numbersOf0 --){
+								result = result + zero;
+				}
+				//				result = zero;
+				return result;
+}//TODO DEV
+
+string replaceMeaningless0WithSpace(string i2262URH){ //replace those meaningless gaps (0) in URH code
+				for (int numbersOf0 = 100; numbersOf0 > 0; numbersOf0 --) {
+								replace_mod(i2262URH, makeStringFullOf0withANumber(numbersOf0), " ");
+				}
+				return i2262URH;
+}
+
+string putTheCodeIntoArray(string iCodeThatAlreadySeperatedByA){
+				string line = "1 1 111 111 1 1 1 111 1 1 1 1 1 1 1 1 111 111 1 1 1 1 1 1 1";
+				string oCodeThatInArray[25];
+				int i = 0;
+				stringstream ssin(line);
+				while (ssin.good() && i < 25){
+								ssin >> oCodeThatInArray[i];
+								++i;
+				}
+				for(i = 0; i < 25; i++){
+								cout << oCodeThatInArray[i] << endl;
+				}
+				return oCodeThatInArray[24];
+}//TODO DEV
+
+
+//string identifyNWMode(){
+//				int number = 0;
+//				for (; number > 24; number ++) {//25 is totall 2262 wave numbers
+//								if () {
+//
+//								}
+//				}
+//}
+
 
 
 //int detectShortestGrainSize(string dataFromURH){ //探测URH数据传过来的二进制字符串的最小粒度
@@ -115,13 +158,13 @@ string decode2262FromURH(string dataFromURH){
 //}
 
 int main(){
-				cout << "OOKFC running\n----\nPress 1 for 4Bits 1527 code to 2Bits\ne.g.H0FF1FHFHH>>10000101110110011010\n----\nPress 2 for 2Bits 1527 code to 4Bits\ne.g. 10000101110110011010>>H0FF1FHFHH\n----\nPress 3 for 3Bits 2262 code to demodulated wave form\n(Kinda useless but i just put it here in case if someone really need it :))\ne.g. 00100F0F0F00>>NNNNWWNNNNNWNNNWNNNWNNNNS\n----\nPress 4 for demodulated wave form to 3Bits 2262 code\n e.g. NNNNWWNNNNNWNNNWNNNWNNNNS>>00100F0F0F00\n----\nPress 5 to exit\n";
-startplce:
+				cout << "OOKFC running\n----\nPress 1 for 4Bits 1527 code to 2Bits\ne.g.H0FF1FHFHH>>10000101110110011010\n----\nPress 2 for 2Bits 1527 code to 4Bits\ne.g. 10000101110110011010>>H0FF1FHFHH\n----\nPress 3 for 3Bits 2262 code to demodulated wave form\n(Kinda useless but i just put it here in case if someone really need it :))\ne.g. 00100F0F0F00>>NNNNWWNNNNNWNNNWNNNWNNNNS\n----\nPress 4 for demodulated wave form to 3Bit 2262 code\n e.g. NNNNWWNNNNNWNNNWNNNWNNNNS>>00100F0F0F00\n----\nPress 5 for demodulated 2262 to static 2262 code\n----\nPress 6 to exit\n";
+startplace:
 				cout << "Your choice:\n>";
 				int select;
 				cin >> select;
 				switch(select){
-								case 1 : {
+								case 1 : {//1527 base4 to base2
 												string i1527B4;
 												string o1527B2;
 												cout << "OOKFC running\nInput 4Bits 1527 code(Without data code):\n>";
@@ -130,7 +173,7 @@ startplce:
 												replace_mod(i1527B4, "F", "1");
 												replace_mod(i1527B4, "H", "2");
 												o1527B2 = DEC2anyBS(anyBS2DEC(i1527B4, 4), 2);
-//												cout  <<"2Bit of it is " + DEC2anyBS(anyBS2DEC(i1527B4, 4), 2) << "\n";
+												//												cout  <<"2Bit of it is " + DEC2anyBS(anyBS2DEC(i1527B4, 4), 2) << "\n";
 												
 												if (size(o1527B2)<20){//In case if the 4 base (4Bit) data started with 0;
 																for (unsigned long length = size(i1527B4); length < 19; length ++) {
@@ -139,9 +182,9 @@ startplce:
 												}
 												//            break;
 												cout << o1527B2 + "\nbacking to main menu::\n----\nmain menu\n----\n";
-												goto startplce;
+												goto startplace;
 								}
-								case 2 : {
+								case 2 : { //1527 Base 2 to Base 4
 												string i1527B2;
 												cout << "Input 2Bits 1527 code(Without data code):\n>";
 												cin >> i1527B2;
@@ -152,11 +195,11 @@ startplce:
 												cout  << "4Bit of it is " + o1527B4 << "\n";
 												//            break;
 												cout << "backing to main menu::\n----\nmain menu\n----\n";
-												goto startplce;
+												goto startplace;
 								}
-								case 3 : {
+								case 3 : { //2262 waveform to Base 3
 												string i2262WS;
-												cout << "Input demodulated wave form of 2262 (WithOUT sync code):\ne.g.\n";
+												cout << "Input demodulated wave form of 2262 (WITHOUT sync code):\ne.g.\n";
 												//            cout << "  ─   ─   ──   ──   ─   ──   ─  \n";
 												cout << " ┌┐ ┌┐ ┌──┐ ┌──┐ ┌┐ ┌──┐ ┌┐ \n";
 												cout << " ││ ││ │  │ │  │ ││ │  │ ││ \n";
@@ -167,14 +210,14 @@ startplce:
 												replace_mod(i2262WS, "NW", "F");
 												replace_mod(i2262WS, "WW", "1");
 												cout << i2262WS;
-												cout  << "3Bit of it is " + i2262WS << "\n";
+												cout  << "Base3 of it is " + i2262WS << "\n";
 												//            break;
 												cout << "backing to main menu::\n----\nmain menu\n----\n";
-												goto startplce;
+												goto startplace;
 								}
-								case 4 : {
+								case 4 : {//2262 Base 3 to waveform
 												string i2262B3;
-												cout << "Input 3Bits 2262 code(Without data code):\n>";
+												cout << "Input ternary 2262 code(Without data code):\n>";
 												cin >> i2262B3;
 												replace_mod(i2262B3, "0", "NN");
 												replace_mod(i2262B3, "1", "WW");
@@ -186,25 +229,68 @@ startplce:
 												cout << "─┘└─┘└─┘  └─┘  └─┘└─┘  └─┘└─\n";
 												//            break;
 												cout << "backing to main menu::\n----\nmain menu\n----\n";
-												goto startplce;
+												goto startplace;
 								}
-								case 5 :{
+								case 5 :{//2262 URH demodulated data to Base3
 												//TODO
+												/**
+													流程：
+													1:找到高电平的无意义的1的个数（肯定是大于2且大于低电平）
+													2.找到低电平的无意义的1的个数（肯定是小于高电平）
+													3.从左边开始查找``find()``，找到一个1(高电平)，再往左找，｜如果是低电平（0），就在数组1中给[0]值0，然后继续查找。
+													｜如果是高电平（1），就在数组1中给[0]值1，然后继续找。
+													4.在数组1中查找，如果可以的话直接用替换法，先把11替换成a，再把10替换成b等等，反正要让顺序不要出现矛盾（或者两两放到数组中再操作更稳妥，包括可以把上面那个case一起替换了）
+													如果不可以用替换法，就用第三步的方法。
+													*/
+												string line = "";
+												cout << "Input 2262 demodulated code from URH:\n>";
+												cin >> line;
+												line = replaceMeaningless0WithSpace(line);
+												//												cout << "replaced is " + line + "\n"; //DBG
+												//												string line = "1 1 111 111 1 1 1 111 1 1 1 1 1 1 1 1 111 111 1 1 1 1 1 1 1"; //DBG
+												string oCodeThatInArray[25];
+												int i = 0;
+												stringstream ssin(line);
+												while (ssin.good() && i < 25){
+																ssin >> oCodeThatInArray[i];
+																++i;
+												}
+												//												for(i = 0; i < 25; i++){//DBG
+												//																cout << oCodeThatInArray[i] << endl;
+												//												}
+												//												return oCodeThatInArray[24];
+												
+												int number = 0;
+												string NWModeOfCode = "";
+												const string N = "N";
+												const string W = "W";
+												for (; number < 24; number ++) {//25 is totall 2262 wave numbers,24 is for remove the sync code
+																if (oCodeThatInArray[number] == "1") {
+																				NWModeOfCode = NWModeOfCode + N;
+																				//																				cout << "\n追加n\n"; //DBG
+																}else{
+																				NWModeOfCode = NWModeOfCode + W;
+																				//																				cout << "\n 追加w \n"; //DBG
+																} //等粒度（无意义的1的个数）算法写好以后最好还是要改成else if 条件为粒度则W。提高鲁棒性。
+																
+												}
+												//												cout << "\n" + NWModeOfCode + "\n"; //DBG
+												replace_mod(NWModeOfCode, "NN", "0");
+												replace_mod(NWModeOfCode, "NW", "F");
+												replace_mod(NWModeOfCode, "WW", "1");
+												//												cout << NWModeOfCode; //DBG
+												cout << "\n----\n";
+												cout  << "Static ternary code of it is " + NWModeOfCode << "\n";
+												cout << "----\nmain menu\n----\n";
+												goto startplace;
 								}
 								case 6 :{
 												break;
 								}
-								case 7 :{//test
-												string test1 = "0000FH01HH";
-												replace_mod(test1, "1", "3");
-												replace_mod(test1, "F", "1");
-												replace_mod(test1, "H", "2");
-												cout << test1;
-												cout << "\n";
-												cout << anyBS2DEC(test1, 4);
-												cout << "\n" ;
-												cout << DEC2anyBS(anyBS2DEC(test1, 4), 2);
-												cout << "\n";
+								case 7 :{//for test
+
+								}
+								case 8 :{//for test
 												
 								}
 				}
