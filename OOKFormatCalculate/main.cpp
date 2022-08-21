@@ -255,7 +255,14 @@ startplace:
 																ssin >> oCodeThatInArray[i];
 																++i;
 												}
-												//												for(i = 0; i < 25; i++){//DBG
+												
+												
+												//Calculate the average	of the array
+												int sum = 0;
+												for (int i = 0; i < 25; i++){
+																sum += stoi(oCodeThatInArray[i]);
+												}
+												int average = sum / 25;												//												for(i = 0; i < 25; i++){//DBG
 												//																cout << oCodeThatInArray[i] << endl;
 												//												}
 												//												return oCodeThatInArray[24];
@@ -265,14 +272,16 @@ startplace:
 												const string N = "N";
 												const string W = "W";
 												for (; number < 24; number ++) {//25 is totall 2262 wave numbers,24 is for remove the sync code
-																if (oCodeThatInArray[number] == "1") {
+																//Convert oCodeThatInArray[number] into int
+																int oCodeThatInArrayInt = stoi(oCodeThatInArray[number]);
+																if (oCodeThatInArrayInt < average) {
 																				NWModeOfCode = NWModeOfCode + N;
 																				//																				cout << "\n追加n\n"; //DBG
-																}else{
+																}else if (oCodeThatInArrayInt	>	average) {
 																				NWModeOfCode = NWModeOfCode + W;
 																				//																				cout << "\n 追加w \n"; //DBG
-																} //等粒度（无意义的1的个数）算法写好以后最好还是要改成else if 条件为粒度则W。提高鲁棒性。
-																
+																}else{
+																				cout << "Error: the average is " << average << " and the number is " << oCodeThatInArray[number] << endl;}
 												}
 												//												cout << "\n" + NWModeOfCode + "\n"; //DBG
 												replace_mod(NWModeOfCode, "NN", "0");
