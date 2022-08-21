@@ -158,7 +158,7 @@ string putTheCodeIntoArray(string iCodeThatAlreadySeperatedByA){
 //}
 
 int main(){
-				cout << "OOKFC running\n----\nPress 1 for 4Bits 1527 code to 2Bits\ne.g.H0FF1FHFHH>>10000101110110011010\n----\nPress 2 for 2Bits 1527 code to 4Bits\ne.g. 10000101110110011010>>H0FF1FHFHH\n----\nPress 3 for 3Bits 2262 code to demodulated wave form\n(Kinda useless but i just put it here in case if someone really need it :))\ne.g. 00100F0F0F00>>NNNNWWNNNNNWNNNWNNNWNNNNS\n----\nPress 4 for demodulated wave form to 3Bit 2262 code\n e.g. NNNNWWNNNNNWNNNWNNNWNNNNS>>00100F0F0F00\n----\nPress 5 for demodulated 2262 to static 2262 code\n----\nPress 6 to exit\n";
+				cout << "OOKFC running\n----\nPress 1 for 4Bits 1527 code to 2Bits\ne.g.H0FF1FHFHH>>10000101110110011010\n----\nPress 2 for 2Bits 1527 code to 4Bits\ne.g. 10000101110110011010>>H0FF1FHFHH\n----\nPress 3 for 3Bits 2262 code to demodulated wave form\n(Kinda useless but i just put it here in case if someone really need it :))\ne.g. 00100F0F0F00>>NNNNWWNNNNNWNNNWNNNWNNNNS\n----\nPress 4 for demodulated wave form to 3Bit 2262 code\n e.g. NNNNWWNNNNNWNNNWNNNWNNNNS>>00100F0F0F00\n----\nPress 5 for demodulated 2262/2260 to static 2262/2260 code\n----\n";//Press 6 for demodulated 1527 to static 1527 code\n----\nPress 7 to exit\n";
 startplace:
 				cout << "Your choice:\n>";
 				int select;
@@ -243,7 +243,7 @@ startplace:
 													如果不可以用替换法，就用第三步的方法。
 													*/
 												string line = "";
-												cout << "Input 2262 demodulated code from URH:\n>";
+												cout << "Input 2262/2260 demodulated code from URH:\n>";
 												cin >> line;
 												line = replaceMeaningless0WithSpace(line);
 												//												cout << "replaced is " + line + "\n"; //DBG
@@ -274,14 +274,16 @@ startplace:
 												for (; number < 24; number ++) {//25 is totall 2262 wave numbers,24 is for remove the sync code
 																//Convert oCodeThatInArray[number] into int
 																int oCodeThatInArrayInt = stoi(oCodeThatInArray[number]);
-																if (oCodeThatInArrayInt < average) {
+																if (oCodeThatInArrayInt <= average) {
 																				NWModeOfCode = NWModeOfCode + N;
 																				//																				cout << "\n追加n\n"; //DBG
 																}else if (oCodeThatInArrayInt	>	average) {
 																				NWModeOfCode = NWModeOfCode + W;
 																				//																				cout << "\n 追加w \n"; //DBG
 																}else{
-																				cout << "Error: the average is " << average << " and the number is " << oCodeThatInArray[number] << endl;}
+																				cout << "Error: the average is " << average << " and the number is " << oCodeThatInArray[number] << endl;
+																				break;
+																}
 												}
 												//												cout << "\n" + NWModeOfCode + "\n"; //DBG
 												replace_mod(NWModeOfCode, "NN", "0");
@@ -293,14 +295,132 @@ startplace:
 												cout << "----\nmain menu\n----\n";
 												goto startplace;
 								}
-								case 6 :{
+								case 6 :{//1527
+												//TODO
+
+												string line = "";
+												cout << "Input 1527 demodulated code from URH:\n>";
+												cin >> line;
+												line = replaceMeaningless0WithSpace(line);
+												//												cout << "replaced is " + line + "\n"; //DBG
+												//												string line = "1 1 111 111 1 1 1 111 1 1 1 1 1 1 1 1 111 111 1 1 1 1 1 1 1"; //DBG
+												string oCodeThatInArray[25];
+												string oDataCodeThatInArray[4];
+												int i = 0;
+												stringstream ssin(line);
+												while (ssin.good() && i < 25){
+																ssin >> oCodeThatInArray[i];
+																++i;
+												}
+												
+
+												
+												//Calculate the average	of the array
+												int sum = 0;
+												for (int i = 0; i < 25; i++){
+																sum += stoi(oCodeThatInArray[i]);
+												}
+												int average = sum / 25;												//												for(i = 0; i < 25; i++){//DBG
+												//																cout << oCodeThatInArray[i] << endl;
+												//												}
+												//												return oCodeThatInArray[24];
+												
+												int number = 0;
+												string NWModeOfCode = "";
+												const string N = "N";
+												const string W = "W";
+												for (; number < 25; number ++) {//25 is total 1527 wave numbers,24 is for remove the sync code
+																//Convert oCodeThatInArray[number] into int
+																int oCodeThatInArrayInt = stoi(oCodeThatInArray[number]);
+																if (oCodeThatInArrayInt <= average) {
+																				NWModeOfCode = NWModeOfCode + N;
+																				//																				cout << "\n追加n\n"; //DBG
+																}else if (oCodeThatInArrayInt	>	average) {
+																				NWModeOfCode = NWModeOfCode + W;
+																				//																				cout << "\n 追加w \n"; //DBG
+																}else{
+																				cout << "Error: the average is " << average << " and the number is " << oCodeThatInArray[number] << endl;
+																				break;
+																}
+												}
+												
+												
+												for (i=0; i<4; i++) {
+																oDataCodeThatInArray[i] = oCodeThatInArray[i+21];
+																cout << "DBGDBG";
+																cout << oDataCodeThatInArray[i];
+												}
+												
+												unsigned long n = NWModeOfCode.length()-4;//seperate NWModeOfCode per 2 char by space, -4 is for remove the data code temp.ly
+												while(n-2 > 0)
+												{
+																n = n - 2;
+																NWModeOfCode.insert(n," ");
+												}
+												
+												
+												string NWModeCodeThatInArray[26];
+												int i2 = 0;
+												stringstream ssin2(NWModeOfCode);
+												while (ssin2.good() && i2 < 26){
+																ssin2 >> NWModeCodeThatInArray[i2];
+																++i2;
+												}
+												for(int y=0;y<26;y++){//last 4 data code is combined with  NN aka 0 and WW aka 1 anyway so it's fine to be converted again
+												//												cout << "\n" + NWModeOfCode + "\n"; //DBG
+												replace_mod(NWModeCodeThatInArray[y], "NN", "0");
+												replace_mod(NWModeCodeThatInArray[y], "NW", "F");
+												replace_mod(NWModeCodeThatInArray[y], "WW", "1");
+												replace_mod(NWModeCodeThatInArray[y], "WN", "H");
+												}
+												//												cout << NWModeOfCode; //DBG
+												cout << "\n----\n";
+												cout  << "Static ternary code of it is ";
+												for (int y = 0; y < 26; y++) {
+
+																cout << NWModeCodeThatInArray[y];
+												}
+												cout << "\n----\nmain menu\n----\n";
+												goto startplace;								}
+								case 7 :{//exit
 												break;
 								}
-								case 7 :{//for test
-
-								}
 								case 8 :{//for test
+												string NWModeOfCode;
+												NWModeOfCode = "WNNNNWNWWWNWWNNW";
+//												string dataStr;
+//												dataStr = NWModeOfCode;
+
+
+												unsigned long n = NWModeOfCode.length();//seperate NWModeOfCode per 2 char by space
+												while(n-2 > 0)
+												{
+																n = n - 2;
+																NWModeOfCode.insert(n," ");
+												}
 												
+												
+												string NWModeCodeThatInArray[26];
+												int i2 = 0;
+												stringstream ssin2(NWModeOfCode);
+												while (ssin2.good() && i2 < 26){
+																ssin2 >> NWModeCodeThatInArray[i2];
+																++i2;
+												}
+												for(int y=0;y<26;y++){
+												//												cout << "\n" + NWModeOfCode + "\n"; //DBG
+												replace_mod(NWModeCodeThatInArray[y], "NN", "0");
+												replace_mod(NWModeCodeThatInArray[y], "NW", "F");
+												replace_mod(NWModeCodeThatInArray[y], "WW", "1");
+												replace_mod(NWModeCodeThatInArray[y], "WN", "H");
+												}
+												//												cout << NWModeOfCode; //DBG
+												cout << "\n----\n";
+												for (int y = 0; y < 26; y++) {
+												cout  << NWModeCodeThatInArray[y];
+												}
+												cout << "----\nmain menu\n----\n";
+												}
 								}
 				}
-}
+
