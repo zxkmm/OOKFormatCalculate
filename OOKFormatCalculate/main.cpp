@@ -222,7 +222,7 @@ startplace:
 												replace_mod(i2262B3, "0", "NN");
 												replace_mod(i2262B3, "1", "WW");
 												replace_mod(i2262B3, "F", "NW");
-												cout  << "demodulated wave form of it is " + i2262B3 + "S" + "\ne.g." << "\n";
+												cout << "demodulated wave form of it is " + i2262B3 + "S" + "\ne.g." << "\n";
 												cout << " N  N   W    W   N    W  S  \n";
 												cout << " ┌┐ ┌┐ ┌──┐ ┌──┐ ┌┐ ┌──┐ ┌┐ \n";
 												cout << " ││ ││ │  │ │  │ ││ │  │ ││ \n";
@@ -291,13 +291,13 @@ startplace:
 												replace_mod(NWModeOfCode, "WW", "1");
 												//												cout << NWModeOfCode; //DBG
 												cout << "\n----\n";
-												cout  << "Static ternary code of it is " + NWModeOfCode << "\n";
+												cout << "Static ternary code of it is " + NWModeOfCode << "\n";
+												cout << "                             AAAAAAAADDDD\n";
 												cout << "----\nmain menu\n----\n";
 												goto startplace;
 								}
 								case 6 :{//1527
 												//TODO
-
 												string line = "";
 												cout << "Input 1527 demodulated code from URH:\n>";
 												cin >> line;
@@ -305,14 +305,19 @@ startplace:
 												//												cout << "replaced is " + line + "\n"; //DBG
 												//												string line = "1 1 111 111 1 1 1 111 1 1 1 1 1 1 1 1 111 111 1 1 1 1 1 1 1"; //DBG
 												string oCodeThatInArray[25];
-												string oDataCodeThatInArray[4];
+												 string oDataCodeThatInArray[4];
 												int i = 0;
 												stringstream ssin(line);
-												while (ssin.good() && i < 25){
+												while (ssin.good() && i < 26){
 																ssin >> oCodeThatInArray[i];
 																++i;
 												}
-												
+//												cout << "\nDBG:oCodeThatInArray:";
+//												for(int i = 0;i<26;i++){//DBG
+//																cout << oCodeThatInArray[i];
+//																cout << " ";
+//												}
+//												cout << "\n";
 
 												
 												//Calculate the average	of the array
@@ -344,18 +349,49 @@ startplace:
 																}
 												}
 												
+//												cout << "DBG";
+//												for (i=0; i<4; i++) {//DBG
+//																oDataCodeThatInArray[i] = oCodeThatInArray[i+21];
+//																cout << oDataCodeThatInArray[i];
+//												}
 												
-												for (i=0; i<4; i++) {
-																oDataCodeThatInArray[i] = oCodeThatInArray[i+21];
-																cout << "DBGDBG";
-																cout << oDataCodeThatInArray[i];
+												//cut the last 5 charactors of NWModeOfCode, which means delete the last 5 charactors aka data code and sync code.
+												NWModeOfCode = NWModeOfCode.substr(0, NWModeOfCode.length() - 5);
+//												cout << "\nDBG:NWModeOfCode: " << NWModeOfCode << endl;
+												
+												//cut last 1 charactors of NWModeOfCode and assign to oDataCodeThatInArray, which means seperated the last 5 charactors aka data code + sync code, and put them into oDataCodeThatInArray, and take care if it later
+												for (i=0; i<4; i++) {//DBG
+																oDataCodeThatInArray[i] = NWModeOfCode.substr(i, 1);
+//																cout << oDataCodeThatInArray[i];
 												}
 												
-												unsigned long n = NWModeOfCode.length()-4;//seperate NWModeOfCode per 2 char by space, -4 is for remove the data code temp.ly
-												while(n-2 > 0)
+												long n = NWModeOfCode.length();//seperate NWModeOfCode per 2 char by space, -4 is for remove the data code temp.ly
+												while(n - 2 > 0)
 												{
+//																cout << "DBG:NWModeOfCode:";
+//																cout << NWModeOfCode;
+//																cout << "\n";
 																n = n - 2;
 																NWModeOfCode.insert(n," ");
+//																cout << "DBG:NWModeOfCode:";
+//																cout << NWModeOfCode;
+//																cout << "\n";
+												}
+//												cout << "DBG:NWModeOfCode:";
+//												cout << NWModeOfCode;
+//												cout << "\n";
+												
+												//now take care of last 5 charactors aka data code and sync code.
+												//replace all W into 1 and all	N into 0 in oDataCodeThatInArray
+												for (i=0; i<4; i++) {//DBG
+																if (oDataCodeThatInArray[i] == W) {
+																				oDataCodeThatInArray[i] = "1";
+																}else if (oDataCodeThatInArray[i] == N) {
+																				oDataCodeThatInArray[i] = "0";
+																}else{
+																				cout << "Error: the average is " << average << " and the number is " << oCodeThatInArray[number] << endl;
+																				break;
+																}
 												}
 												
 												
@@ -380,6 +416,12 @@ startplace:
 
 																cout << NWModeCodeThatInArray[y];
 												}
+												//print a space and oDataCodeThatInArray aka data code
+												cout << " ";
+												for (i=0; i<4; i++) {// print data code
+																cout << oDataCodeThatInArray[i];
+												}
+												cout << "\n                             AAAAAAAAAA DDDD";
 												cout << "\n----\nmain menu\n----\n";
 												goto startplace;								}
 								case 7 :{//exit
@@ -419,6 +461,7 @@ startplace:
 												for (int y = 0; y < 26; y++) {
 												cout  << NWModeCodeThatInArray[y];
 												}
+												
 												cout << "----\nmain menu\n----\n";
 												}
 								}
