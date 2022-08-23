@@ -167,8 +167,20 @@ startplace:
 								case 1 : {//1527 base4 to base2
 												string i1527B4;
 												string o1527B2;
-												cout << "OOKFC running\nInput 4Bits 1527 code(Without data code):\n>";
+												cout << "Input 4Bits 1527 code(Without data code):\n>";
 												cin >> i1527B4;
+												//detect if user inputed right code
+												if(size(i1527B4) == 10){//size right
+																//size right
+																goto start15274to2work;
+												}else if (size(i1527B4) == 14){//inputed data code
+																cout << "It seems you inputed the data code, please only input address code.";
+																goto startplace;
+												}else{//unknown size
+																cout << "You inputed a wrong code. Please make sure you  inputed 1527 address code.";
+																goto startplace;
+												}
+												start15274to2work:
 												replace_mod(i1527B4, "1", "3");
 												replace_mod(i1527B4, "F", "1");
 												replace_mod(i1527B4, "H", "2");
@@ -181,13 +193,34 @@ startplace:
 																}
 												}
 												//            break;
+//												cout << size(o1527B2);//DBG
+												//detect if the size is correct
+												if(size(o1527B2) != 20){
+																cout << "error, maybe share the address code with the developer";
+																goto startplace;
+												}else{
+												//dected end
+												cout << "\n2 Bit code if it is: ";
 												cout << o1527B2 + "\nbacking to main menu::\n----\nmain menu\n----\n";
 												goto startplace;
+												}
 								}
 								case 2 : { //1527 Base 2 to Base 4
 												string i1527B2;
 												cout << "Input 2Bits 1527 code(Without data code):\n>";
 												cin >> i1527B2;
+												//detect if user inputed right code
+												if(size(i1527B2) == 20){//size right
+																//size right
+																goto start15272to4work;
+												}else if (size(i1527B2) == 24){//inputed data code
+																cout << "It seems you inputed the data code, please only input address code.";
+																goto startplace;
+												}else{//unknown size
+																cout << "You inputed a wrong code. Please make sure you  inputed 1527 address code.";
+																goto startplace;
+												}
+												start15272to4work:
 												string o1527B4 = DEC2anyBS(anyBS2DEC(i1527B2, 2), 4);
 												replace_mod(o1527B4, "1", "F");
 												replace_mod(o1527B4, "3", "1");
@@ -411,6 +444,8 @@ startplace:
 												}
 												//												cout << NWModeOfCode; //DBG
 												cout << "\n----\n";
+												
+
 												cout  << "Static ternary code of it is ";
 												for (int y = 0; y < 26; y++) {
 
