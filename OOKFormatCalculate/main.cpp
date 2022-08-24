@@ -158,7 +158,7 @@ string putTheCodeIntoArray(string iCodeThatAlreadySeperatedByA){
 //}
 
 int main(){
-				cout << "OOKFC running\n----\nPress 1 for 4Bits 1527 code to 2Bits\ne.g.H0FF1FHFHH>>10000101110110011010\n----\nPress 2 for 2Bits 1527 code to 4Bits\ne.g. 10000101110110011010>>H0FF1FHFHH\n----\nPress 3 for 3Bits 2262 code to demodulated wave form\n(Kinda useless but i just put it here in case if someone really need it :))\ne.g. 00100F0F0F00>>NNNNWWNNNNNWNNNWNNNWNNNNS\n----\nPress 4 for demodulated wave form to 3Bit 2262 code\n e.g. NNNNWWNNNNNWNNNWNNNWNNNNS>>00100F0F0F00\n----\nPress 5 for demodulated 2262/2260 to static 2262/2260 code\n----\n";//Press 6 for demodulated 1527 to static 1527 code\n----\nPress 7 to exit\n";
+				cout << "OOKFC running\n----\nPress 1 for 4Bits 1527 code to 2Bits\ne.g.H0FF1FHFHH>>10000101110110011010\n----\nPress 2 for 2Bits 1527 code to 4Bits\ne.g. 10000101110110011010>>H0FF1FHFHH\n----\nPress 3 for 3Bits 2262 code to demodulated wave form\n(Kinda useless but i just put it here in case if someone really need it :))\ne.g. 00100F0F0F00>>NNNNWWNNNNNWNNNWNNNWNNNNS\n----\nPress 4 for demodulated wave form to 3Bit 2262 code\n e.g. NNNNWWNNNNNWNNNWNNNWNNNNS>>00100F0F0F00\n----\nPress 5 for demodulated 2262/2260 from URH to static 2262/2260 code\n----\nPress 6 for demodulated 1527 from URH to static 1527 code\n----\nPress 7 to exit\n";
 startplace:
 				cout << "Your choice:\n>";
 				int select;
@@ -174,13 +174,14 @@ startplace:
 																//size right
 																goto start15274to2work;
 												}else if (size(i1527B4) == 14){//inputed data code
-																cout << "It seems you inputed the data code, please only input address code.";
+																cout << "It seems you inputed the data code, please only input address code.\n";
 																goto startplace;
 												}else{//unknown size
-																cout << "You inputed a wrong code. Please make sure you  inputed 1527 address code.";
+																//																cout << size(i1527B4);//DBG
+																cout << "You inputed a wrong code. Please make sure you inputed 1527 address code.";
 																goto startplace;
 												}
-												start15274to2work:
+								start15274to2work:
 												replace_mod(i1527B4, "1", "3");
 												replace_mod(i1527B4, "F", "1");
 												replace_mod(i1527B4, "H", "2");
@@ -188,21 +189,27 @@ startplace:
 												//												cout  <<"2Bit of it is " + DEC2anyBS(anyBS2DEC(i1527B4, 4), 2) << "\n";
 												
 												if (size(o1527B2)<20){//In case if the 4 base (4Bit) data started with 0;
-																for (unsigned long length = size(i1527B4); length < 19; length ++) {
+																for (long length = size(o1527B2); length < 20; length ++) {
+																				//																				cout << length;//DBG
+																				//																				cout << "\n";//DBG
 																				o1527B2 = "0" + o1527B2;
 																}
 												}
 												//            break;
-//												cout << size(o1527B2);//DBG
+												//												cout << size(o1527B2);//DBG
 												//detect if the size is correct
 												if(size(o1527B2) != 20){
-																cout << "error, maybe share the address code with the developer";
+																cout << "Error, maybe share the address code with the developer.\n";
+																cout << "Error code is:";
+																cout << size(o1527B2);
+																cout << o1527B2;
+																cout << "\n";
 																goto startplace;
 												}else{
-												//dected end
-												cout << "\n2 Bit code if it is: ";
-												cout << o1527B2 + "\nbacking to main menu::\n----\nmain menu\n----\n";
-												goto startplace;
+																//dected end
+																cout << "\n2 Bit code if it is: ";
+																cout << o1527B2 + "\nbacking to main menu::\n----\nmain menu\n----\n";
+																goto startplace;
 												}
 								}
 								case 2 : { //1527 Base 2 to Base 4
@@ -220,11 +227,25 @@ startplace:
 																cout << "You inputed a wrong code. Please make sure you  inputed 1527 address code.";
 																goto startplace;
 												}
-												start15272to4work:
+								start15272to4work:
 												string o1527B4 = DEC2anyBS(anyBS2DEC(i1527B2, 2), 4);
 												replace_mod(o1527B4, "1", "F");
 												replace_mod(o1527B4, "3", "1");
 												replace_mod(o1527B4, "2", "H");
+												if (size(o1527B4)<10){//In case if the 2 base (2Bit) data started with 0;
+																for (long length = size(o1527B4); length < 10; length ++) {
+																				//																				cout << length;//DBG
+																				//																				cout << "\n";//DBG
+																				o1527B4 = "0" + o1527B4;
+																}
+												}
+												if (size(o1527B4) == 10) {//check if the output is correct
+																//correct
+																goto startOutput1527B4;
+												} else{
+																cout << "Error, maybe share the address code with the developer";
+												}
+								startOutput1527B4:
 												cout  << "4Bit of it is " + o1527B4 << "\n";
 												//            break;
 												cout << "backing to main menu::\n----\nmain menu\n----\n";
@@ -232,17 +253,36 @@ startplace:
 								}
 								case 3 : { //2262 waveform to Base 3
 												string i2262WS;
+								startInput2262WS:
 												cout << "Input demodulated wave form of 2262 (WITHOUT sync code):\ne.g.\n";
-												//            cout << "  ─   ─   ──   ──   ─   ──   ─  \n";
 												cout << " ┌┐ ┌┐ ┌──┐ ┌──┐ ┌┐ ┌──┐ ┌┐ \n";
 												cout << " ││ ││ │  │ │  │ ││ │  │ ││ \n";
 												cout << "─┘└─┘└─┘  └─┘  └─┘└─┘  └─┘└─\n";
 												cout << " N  N    W    W   N   W   S  \n>";
 												cin >> i2262WS;
+												if (size(i2262WS) == 24) {//detect is user inputed correct code
+																//inputed correct
+																goto startCalculate2262WS;
+												}else if (size(i2262WS) == 25){
+																cout << "you inputed code within sync code, you should remove sync code and try again.";
+																goto startInput2262WS;
+												}else{
+																cout << "It seems you inputed wrong code, please make sure you inputed right 2262 code.";
+																goto startInput2262WS;
+												}
+								startCalculate2262WS:
 												replace_mod(i2262WS, "NN", "0");
 												replace_mod(i2262WS, "NW", "F");
 												replace_mod(i2262WS, "WW", "1");
-												cout << i2262WS;
+												if (size(i2262WS) == 12) {//check if the output is correct
+																//output is correct
+																goto startOutput3Bit2262;
+												}else{
+																cout << "It seems you inputed wrong code, please make sure you inputed right 2262 code.";//it is because user inputed those form that doesn't exist e.g. it contains WS aka H which is not exist in 2262.
+																goto startInput2262WS;
+												}
+												//												cout << i2262WS;
+								startOutput3Bit2262:
 												cout  << "Base3 of it is " + i2262WS << "\n";
 												//            break;
 												cout << "backing to main menu::\n----\nmain menu\n----\n";
@@ -250,11 +290,26 @@ startplace:
 								}
 								case 4 : {//2262 Base 3 to waveform
 												string i2262B3;
-												cout << "Input ternary 2262 code(Without data code):\n>";
+								startInput22623B:
+												cout << "Input ternary 2262 code:\n>";
 												cin >> i2262B3;
+												if (size(i2262B3) == 12) {//check if user inputed right 2262 3 bit code
+																goto startCalculate2262WS23B;
+												}else{
+																cout << "It seems you inputed wrong code, please try again";
+																goto startInput22623B;
+												}
+								startCalculate2262WS23B:
 												replace_mod(i2262B3, "0", "NN");
 												replace_mod(i2262B3, "1", "WW");
 												replace_mod(i2262B3, "F", "NW");
+												if (size(i2262B3) == 24) {//check if output is correct. the S is manually IO::cout so in here it is 24
+																goto startOutput242262WS;
+												}else{
+																cout << "Error, maybe share 3Bit 2262 code with developer.";
+																goto startInput22623B;
+												}
+								startOutput242262WS:
 												cout << "demodulated wave form of it is " + i2262B3 + "S" + "\ne.g." << "\n";
 												cout << " N  N   W    W   N    W  S  \n";
 												cout << " ┌┐ ┌┐ ┌──┐ ┌──┐ ┌┐ ┌──┐ ┌┐ \n";
@@ -265,7 +320,6 @@ startplace:
 												goto startplace;
 								}
 								case 5 :{//2262 URH demodulated data to Base3
-												//TODO
 												/**
 													流程：
 													1:找到高电平的无意义的1的个数（肯定是大于2且大于低电平）
@@ -330,7 +384,6 @@ startplace:
 												goto startplace;
 								}
 								case 6 :{//1527
-												//TODO
 												string line = "";
 												cout << "Input 1527 demodulated code from URH:\n>";
 												cin >> line;
@@ -338,20 +391,20 @@ startplace:
 												//												cout << "replaced is " + line + "\n"; //DBG
 												//												string line = "1 1 111 111 1 1 1 111 1 1 1 1 1 1 1 1 111 111 1 1 1 1 1 1 1"; //DBG
 												string oCodeThatInArray[25];
-												 string oDataCodeThatInArray[4];
+												string oDataCodeThatInArray[4];
 												int i = 0;
 												stringstream ssin(line);
 												while (ssin.good() && i < 26){
 																ssin >> oCodeThatInArray[i];
 																++i;
 												}
-//												cout << "\nDBG:oCodeThatInArray:";
-//												for(int i = 0;i<26;i++){//DBG
-//																cout << oCodeThatInArray[i];
-//																cout << " ";
-//												}
-//												cout << "\n";
-
+												//												cout << "\nDBG:oCodeThatInArray:";
+												//												for(int i = 0;i<26;i++){//DBG
+												//																cout << oCodeThatInArray[i];
+												//																cout << " ";
+												//												}
+												//												cout << "\n";
+												
 												
 												//Calculate the average	of the array
 												int sum = 0;
@@ -382,37 +435,37 @@ startplace:
 																}
 												}
 												
-//												cout << "DBG";
-//												for (i=0; i<4; i++) {//DBG
-//																oDataCodeThatInArray[i] = oCodeThatInArray[i+21];
-//																cout << oDataCodeThatInArray[i];
-//												}
+												//												cout << "DBG";
+												//												for (i=0; i<4; i++) {//DBG
+												//																oDataCodeThatInArray[i] = oCodeThatInArray[i+21];
+												//																cout << oDataCodeThatInArray[i];
+												//												}
 												
 												//cut the last 5 charactors of NWModeOfCode, which means delete the last 5 charactors aka data code and sync code.
 												NWModeOfCode = NWModeOfCode.substr(0, NWModeOfCode.length() - 5);
-//												cout << "\nDBG:NWModeOfCode: " << NWModeOfCode << endl;
+												//												cout << "\nDBG:NWModeOfCode: " << NWModeOfCode << endl;
 												
 												//cut last 1 charactors of NWModeOfCode and assign to oDataCodeThatInArray, which means seperated the last 5 charactors aka data code + sync code, and put them into oDataCodeThatInArray, and take care if it later
 												for (i=0; i<4; i++) {//DBG
 																oDataCodeThatInArray[i] = NWModeOfCode.substr(i, 1);
-//																cout << oDataCodeThatInArray[i];
+																//																cout << oDataCodeThatInArray[i];
 												}
 												
 												long n = NWModeOfCode.length();//seperate NWModeOfCode per 2 char by space, -4 is for remove the data code temp.ly
 												while(n - 2 > 0)
 												{
-//																cout << "DBG:NWModeOfCode:";
-//																cout << NWModeOfCode;
-//																cout << "\n";
+																//																cout << "DBG:NWModeOfCode:";
+																//																cout << NWModeOfCode;
+																//																cout << "\n";
 																n = n - 2;
 																NWModeOfCode.insert(n," ");
-//																cout << "DBG:NWModeOfCode:";
-//																cout << NWModeOfCode;
-//																cout << "\n";
+																//																cout << "DBG:NWModeOfCode:";
+																//																cout << NWModeOfCode;
+																//																cout << "\n";
 												}
-//												cout << "DBG:NWModeOfCode:";
-//												cout << NWModeOfCode;
-//												cout << "\n";
+												//												cout << "DBG:NWModeOfCode:";
+												//												cout << NWModeOfCode;
+												//												cout << "\n";
 												
 												//now take care of last 5 charactors aka data code and sync code.
 												//replace all W into 1 and all	N into 0 in oDataCodeThatInArray
@@ -436,27 +489,27 @@ startplace:
 																++i2;
 												}
 												for(int y=0;y<26;y++){//last 4 data code is combined with  NN aka 0 and WW aka 1 anyway so it's fine to be converted again
-												//												cout << "\n" + NWModeOfCode + "\n"; //DBG
-												replace_mod(NWModeCodeThatInArray[y], "NN", "0");
-												replace_mod(NWModeCodeThatInArray[y], "NW", "F");
-												replace_mod(NWModeCodeThatInArray[y], "WW", "1");
-												replace_mod(NWModeCodeThatInArray[y], "WN", "H");
+																//												cout << "\n" + NWModeOfCode + "\n"; //DBG
+																replace_mod(NWModeCodeThatInArray[y], "NN", "0");
+																replace_mod(NWModeCodeThatInArray[y], "NW", "F");
+																replace_mod(NWModeCodeThatInArray[y], "WW", "1");
+																replace_mod(NWModeCodeThatInArray[y], "WN", "H");
 												}
 												//												cout << NWModeOfCode; //DBG
 												cout << "\n----\n";
 												
-
+												
 												cout  << "Static ternary code of it is ";
 												for (int y = 0; y < 26; y++) {
-
+																
 																cout << NWModeCodeThatInArray[y];
 												}
 												//print a space and oDataCodeThatInArray aka data code
-												cout << " ";
+												//												cout << " ";
 												for (i=0; i<4; i++) {// print data code
 																cout << oDataCodeThatInArray[i];
 												}
-												cout << "\n                             AAAAAAAAAA DDDD";
+												cout << "\n                             AAAAAAAAAADDDD";
 												cout << "\n----\nmain menu\n----\n";
 												goto startplace;								}
 								case 7 :{//exit
@@ -465,10 +518,10 @@ startplace:
 								case 8 :{//for test
 												string NWModeOfCode;
 												NWModeOfCode = "WNNNNWNWWWNWWNNW";
-//												string dataStr;
-//												dataStr = NWModeOfCode;
-
-
+												//												string dataStr;
+												//												dataStr = NWModeOfCode;
+												
+												
 												unsigned long n = NWModeOfCode.length();//seperate NWModeOfCode per 2 char by space
 												while(n-2 > 0)
 												{
@@ -485,20 +538,20 @@ startplace:
 																++i2;
 												}
 												for(int y=0;y<26;y++){
-												//												cout << "\n" + NWModeOfCode + "\n"; //DBG
-												replace_mod(NWModeCodeThatInArray[y], "NN", "0");
-												replace_mod(NWModeCodeThatInArray[y], "NW", "F");
-												replace_mod(NWModeCodeThatInArray[y], "WW", "1");
-												replace_mod(NWModeCodeThatInArray[y], "WN", "H");
+																//												cout << "\n" + NWModeOfCode + "\n"; //DBG
+																replace_mod(NWModeCodeThatInArray[y], "NN", "0");
+																replace_mod(NWModeCodeThatInArray[y], "NW", "F");
+																replace_mod(NWModeCodeThatInArray[y], "WW", "1");
+																replace_mod(NWModeCodeThatInArray[y], "WN", "H");
 												}
 												//												cout << NWModeOfCode; //DBG
 												cout << "\n----\n";
 												for (int y = 0; y < 26; y++) {
-												cout  << NWModeCodeThatInArray[y];
+																cout  << NWModeCodeThatInArray[y];
 												}
 												
 												cout << "----\nmain menu\n----\n";
-												}
 								}
 				}
+}
 
