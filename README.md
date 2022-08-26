@@ -15,8 +15,11 @@ e.g.
 e.g.  
 ``001FFF101FFF1``<--->``NNNNWWNWNWNWWWNNWWNWNWNWWW``  
 ``100010001110111010001001001110100010001000100100010001000100011101110100010001000100010001000100``---->``010F000010000``  
-### About the sync code
-There is a sync code in the end of each frame of 2262 Signal, PLS note that you should manually ignore a narrow wave crest in the end when inputing your 2 Bits 2262 data. I cannot resolve that part for you because URH always manufacts meaningless ``0`` so it is logically not possible to guess whether you input the sync signal.
+## About the sync code
+There is a sync code in the end of each frame of 2262/2260/1527 Signal. It makes Samy's De-Bruijn attack not working on these encoders.
+
+## About the DIP switch  
+If your are trying to put your code that ecoded by this script into a DIP switch remote, notice that if your ``data code`` is one of them: ``0001`` ``0010`` ``0100`` ``1000``, and if NOT, then the DIP switch remote won't work correctly. In this case you should buy a remote that able to replay.
 # Note  
 This repo is just a tool to decode data from URH or calculate data/code/waveform in different format, which mainly progressing strings, if you are looking for a tool to progress/demodulate raw files/ HEX datas like ```.complex``` or ```.C16```, pls refer to these project below:  
 [URH](https://github.com/jopohl/urh)  
