@@ -13,7 +13,6 @@
 using namespace std;
 
 int anyBS2DEC(string s,int radix){    //Any base to DEC. s for incoming string, radix for it's BS
-				
 				int ans=0;
 				for(int i=0;i<s.size();i++)
 				{
