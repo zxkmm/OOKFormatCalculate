@@ -376,6 +376,15 @@ int main(){
             replace_mod(NWModeOfCode, "NW", "F");
             replace_mod(NWModeOfCode, "WW", "1");
             //												cout << NWModeOfCode; //DBG
+
+
+            //check if there's any "N" or "W" in NWMoDeOfCode
+            if (NWModeOfCode.find("N") != string::npos || NWModeOfCode.find("W") != string::npos) {
+                cout << "Error: Maybe try 1527. this encoder looks like 1527, if there's still error, maybe share the raw with dev\n";
+                break;
+            }
+
+
             cout << "\n----\n";
             cout << "Static ternary code of it is " + NWModeOfCode << "\n";
             cout << "                             AAAAAAAADDDD\n";
@@ -480,6 +489,7 @@ int main(){
             }
 
 
+
             string NWModeCodeThatInArray[26];
             int i2 = 0;
             stringstream ssin2(NWModeOfCode);
@@ -547,6 +557,14 @@ int main(){
             cout << "\n----\n";
             for (int y = 0; y < 26; y++) {
                 cout  << NWModeCodeThatInArray[y];
+            }
+
+            //check if there's any "N" or "W" in NWMCodeThatInArray
+            for (int y = 0; y < 26; y++) {
+                if (NWModeCodeThatInArray[y] == "N" || NWModeCodeThatInArray[y] == "W") {
+                    cout << "\nError: Maybe Try 2262, if the error still exist, maybe share the raw files with dev."  << endl;
+                    break;
+                }
             }
 
             cout << "----\nmain menu\n----\n";
