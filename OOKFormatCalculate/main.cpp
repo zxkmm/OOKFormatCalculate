@@ -157,7 +157,7 @@ string putTheCodeIntoArray(string iCodeThatAlreadySeperatedByA){
 //}
 
 int main(){
-    cout << "OOKFC running\n----\nPress 1 for 4Bits 1527 code to 2Bits\ne.g.H0FF1FHFHH>>10000101110110011010\n----\nPress 2 for 2Bits 1527 code to 4Bits\ne.g. 10000101110110011010>>H0FF1FHFHH\n----\nPress 3 for 3Bits 2262 code to demodulated wave form\n(Kinda useless but i just put it here in case if someone really need it :))\ne.g. 00100F0F0F00>>NNNNWWNNNNNWNNNWNNNWNNNNS\n----\nPress 4 for demodulated wave form to 3Bit 2262 code\n e.g. NNNNWWNNNNNWNNNWNNNWNNNNS>>00100F0F0F00\n----\nPress 5 for demodulated 2262/2260 from URH to static 2262/2260 code\n----\nPress 6 for demodulated 1527 from URH to static 1527 code\n----\nPress 7 to exit\n";
+    cout << "OOKFC running\n----\nPress 1 for 4Bits 1527 code to 2Bits\ne.g.H0FF1FHFHH>>10000101110110011010\n----\nPress 2 for 2Bits 1527 code to 4Bits\ne.g. 10000101110110011010>>H0FF1FHFHH\n----\nPress 3 for 3Bits 2262 code to demodulated wave form\n(Kinda useless but i just put it here in case if someone really need it :))\ne.g. 00100F0F0F00>>NNNNWWNNNNNWNNNWNNNWNNNNS\n----\nPress 4 for demodulated wave form to 3Bit 2262 code\n e.g. NNNNWWNNNNNWNNNWNNNWNNNNS>>00100F0F0F00\n----\nPress 5 for demodulated 2262/2260 from URH to static 2262/2260 code\n----\nPress 6 for demodulated 1527 from URH to static 1527 code\n----\nPress 7 for general decode e.g. Tesla/K5 Morining/Car keys\n----\nPress 99 to exit.";
     startplace:
     cout << "Your choice:\n>";
     int select;
@@ -521,8 +521,87 @@ int main(){
             cout << "\n                             AAAAAAAAAADDDD";
             cout << "\n----\nmain menu\n----\n";
             goto startplace;								}
-        case 7 :{//exit
-            break;
+
+
+        case 7 :{//general //TODO
+            //ask user to input a string
+            cout << "Please input a general demodulated code from URH: \n>";
+            string oCodeGeneral;
+            cin >> oCodeGeneral;
+//            //DBG start
+//            cout << "\n----\n";
+//            cout << oCodeGeneral;
+//            cout << "\n----\n";
+//            //DBG end
+            //add 0 is for making sure that the both sides of the string has 0, so that the string can be divided by space and we could detect how long the array should be.
+            //add "0" to the end of oCodeGeneral
+            oCodeGeneral = oCodeGeneral + "0";
+            //add "0" to the start of oCodeGeneral
+            oCodeGeneral = "0" + oCodeGeneral;
+
+//            //DBG start
+//            cout << "\n----\n";
+//            cout << oCodeGeneral;
+//            cout << "\n----\n";
+//            //DBG end
+
+            oCodeGeneral = replaceMeaningless0WithSpace(oCodeGeneral);
+
+            //if there is one or more spaces in the beginning of the string, delete them
+            while (oCodeGeneral[0] == ' ') {
+                oCodeGeneral = oCodeGeneral.substr(1);
+            }
+            //if there is one or more spaces in the end of the string, delete them
+            while (oCodeGeneral[oCodeGeneral.length() - 1] == ' ') {
+                oCodeGeneral = oCodeGeneral.substr(0, oCodeGeneral.length() - 1);
+            }
+
+
+            //detect how many space in the string
+            int spaceCount = 0;
+            for (int i = 0; i < oCodeGeneral.length(); i++) {
+                if (oCodeGeneral[i] == ' ') {
+                    spaceCount++;
+                }
+//																spaceCount = spaceCount + 1;
+            }
+
+
+            string oCodeThatInArray[spaceCount];
+            //put the string which seperated by spaces into oCodeThatInArray
+            int i = 0;
+            stringstream ssin(oCodeGeneral);
+            while (ssin.good() && i < spaceCount){
+                ssin >> oCodeThatInArray[i];
+                ++i;
+            }
+//           for (int y = 0; y < spaceCount; y++) {
+//            	cout << oCodeThatInArray[y] << endl;
+//                cout << "\nend";
+//            }
+
+           //calculate the average of the array
+            int average = 0;
+            for (int number = 0; number < spaceCount; number++) {
+                average = average + stoi(oCodeThatInArray[number]);
+            }
+            average = average / spaceCount;
+            string NWModeOfCode = "";
+
+            //check the array one by one and if one of the number is bigger than the average, then add W into NWModeOfCode, if not, add N into NWModeOfCode
+            for (int number = 0; number < spaceCount; number++) {
+                if (stoi(oCodeThatInArray[number]) > average) {
+                    NWModeOfCode = NWModeOfCode +"W";
+                }else{
+                    NWModeOfCode = NWModeOfCode + "N";
+                }
+            }
+			cout << "NWModeOfGeneralCode:";
+			cout << NWModeOfCode;
+			cout << "\n";
+
+												cout << "\n----\nmain menu\n----\n";
+												goto startplace;
         }
         case 8 :{//for test
             string NWModeOfCode;
@@ -568,6 +647,9 @@ int main(){
             }
 
             cout << "----\nmain menu\n----\n";
+        }
+        case 99:{
+            break;
         }
     }
 }
