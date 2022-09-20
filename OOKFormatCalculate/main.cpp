@@ -127,7 +127,7 @@ string putTheCodeIntoArray(string iCodeThatAlreadySeperatedByA){
 }//TODO DEV
 
 void outputAClearResult(string explainContent, string result, string ADFormat){
-    cout << explainContent << result << ADFormat << endl;
+//    cout << explainContent << result << ADFormat << endl;
 	//detect how long the result is, then put the result into an int variable
     int resultLength = result.length();
     //detect how long the explainContent is, then put the explainContent into an int variable
