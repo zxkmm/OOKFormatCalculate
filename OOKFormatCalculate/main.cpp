@@ -14,9 +14,8 @@ using namespace std;
 
 int anyBS2DEC(string s,int radix){    //Any base to DEC. s for incoming string, radix for it's BS
     int ans=0;
-    for(int i=0;i<s.size();i++)
+    for(char t : s)
     {
-        char t=s[i];
         if(t>='0'&&t<='9') ans=ans*radix+t-'0';
         else ans=ans*radix+t-'a'+10;
     }
