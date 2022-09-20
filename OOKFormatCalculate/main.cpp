@@ -384,8 +384,8 @@ int main(){
 
             //Calculate the average	of the array
             int sum = 0;
-            for (int i = 0; i < 25; i++){
-                sum += stoi(oCodeThatInArray[i]);
+            for (const auto & i : oCodeThatInArray){
+                sum += stoi(i);
             }
             int average = sum / 25;												//												for(i = 0; i < 25; i++){//DBG
             //																cout << oCodeThatInArray[i] << endl;
@@ -456,8 +456,8 @@ int main(){
 
             //Calculate the average	of the array
             int sum = 0;
-            for (int i = 0; i < 25; i++){
-                sum += stoi(oCodeThatInArray[i]);
+            for (const auto & i : oCodeThatInArray){
+                sum += stoi(i);
             }
             int average = sum / 25;												//												for(i = 0; i < 25; i++){//DBG
             //																cout << oCodeThatInArray[i] << endl;
@@ -537,21 +537,21 @@ int main(){
                 ssin2 >> NWModeCodeThatInArray[i2];
                 ++i2;
             }
-            for(int y=0;y<26;y++){//last 4 data code is combined with  NN aka 0 and WW aka 1 anyway, so it's fine to be converted again
+            for(auto & y : NWModeCodeThatInArray){//last 4 data code is combined with  NN aka 0 and WW aka 1 anyway, so it's fine to be converted again
                 //												cout << "\n" + NWModeOfCode + "\n"; //DBG
-                replace_mod(NWModeCodeThatInArray[y], "NN", "0");
-                replace_mod(NWModeCodeThatInArray[y], "NW", "F");
-                replace_mod(NWModeCodeThatInArray[y], "WW", "1");
-                replace_mod(NWModeCodeThatInArray[y], "WN", "H");
+                replace_mod(y, "NN", "0");
+                replace_mod(y, "NW", "F");
+                replace_mod(y, "WW", "1");
+                replace_mod(y, "WN", "H");
             }
             //												cout << NWModeOfCode; //DBG
             cout << "\n----\n";
 
 
             cout  << "Static ternary code of it is ";
-            for (int y = 0; y < 26; y++) {
+            for (auto & y : NWModeCodeThatInArray) {
 
-                cout << NWModeCodeThatInArray[y];
+                cout << y;
             }
             //print a space and oDataCodeThatInArray aka data code
             //												cout << " ";
@@ -599,8 +599,8 @@ int main(){
 
             //detect how many space in the string
             int spaceCount = 0;
-            for (int i = 0; i < oCodeGeneral.length(); i++) {
-                if (oCodeGeneral[i] == ' ') {
+            for (char i : oCodeGeneral) {
+                if (i == ' ') {
                     spaceCount++;
                 }
 //																spaceCount = spaceCount + 1;
@@ -665,22 +665,22 @@ int main(){
                 ssin2 >> NWModeCodeThatInArray[i2];
                 ++i2;
             }
-            for(int y=0;y<26;y++){
+            for(auto & y : NWModeCodeThatInArray){
                 //												cout << "\n" + NWModeOfCode + "\n"; //DBG
-                replace_mod(NWModeCodeThatInArray[y], "NN", "0");
-                replace_mod(NWModeCodeThatInArray[y], "NW", "F");
-                replace_mod(NWModeCodeThatInArray[y], "WW", "1");
-                replace_mod(NWModeCodeThatInArray[y], "WN", "H");
+                replace_mod(y, "NN", "0");
+                replace_mod(y, "NW", "F");
+                replace_mod(y, "WW", "1");
+                replace_mod(y, "WN", "H");
             }
             //												cout << NWModeOfCode; //DBG
             cout << "\n----\n";
-            for (int y = 0; y < 26; y++) {
-                cout  << NWModeCodeThatInArray[y];
+            for (auto & y : NWModeCodeThatInArray) {
+                cout  << y;
             }
 
             //check if there's any "N" or "W" in NWMCodeThatInArray
-            for (int y = 0; y < 26; y++) {
-                if (NWModeCodeThatInArray[y] == "N" || NWModeCodeThatInArray[y] == "W") {
+            for (auto & y : NWModeCodeThatInArray) {
+                if (y == "N" || y == "W") {
                     cout << "\nError: Maybe Try 2262, if the error still exist, maybe share the raw files with dev."  << endl;
                     break;
                 }
