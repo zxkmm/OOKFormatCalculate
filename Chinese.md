@@ -46,7 +46,7 @@ URH 解调的数据 ----> 2位 通用数据
 [PortapackMayhem](https://github.com/eried/portapack-mayhem)  
 [2262Scan](https://github.com/zxkmm/2262Scan)
 # i18n
-[English](https://github.com/zxkmm/OOKFormatCalculate/blob/main/readme.md)
+[English](https://github.com/zxkmm/OOKFormatCalculate/blob/main/README.md)
 # Credit
 [PickedItMate](https://github.com/pickeditmate)  
 [jimilinuxguy](https://github.com/jimilinuxguy)  
