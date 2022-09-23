@@ -41,7 +41,7 @@ URH 解调的数据 ----> 2位 通用数据
 [rtl-433](https://github.com/merbanan/rtl_433)  
 [ooktools](https://github.com/leonjza/ooktools)   
 [RFQuack](https://github.com/rfquack/RFQuack)  
-如果你正在尝试暴力破解OOK设备，请尝试下面的项目：
+如果你正在尝试暴力破解OOK设备，请尝试下面的项目：  
 [OpenSesame](https://github.com/samyk/opensesame)  
 [PortapackMayhem](https://github.com/eried/portapack-mayhem)  
 [2262Scan](https://github.com/zxkmm/2262Scan)
