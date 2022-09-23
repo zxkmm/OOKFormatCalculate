@@ -1,7 +1,7 @@
 # OOKFormatCalculate
 Other encoders is OTW.
 JS+HTML web app is OTW.
-[WebVersion](https://onlinegdb.com/jWH5Eh_ZM)
+[WebVersion](https://onlinegdb.com/M6MxGi82p)
 # Usage
 ## 1527
 4Bits data <---> 2Bits data  
