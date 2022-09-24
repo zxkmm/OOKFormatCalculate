@@ -2,6 +2,10 @@
 Other encoders is OTW.
 JS+HTML web app is OTW.
 [WebVersion](https://onlinegdb.com/M6MxGi82p)
+
+https://user-images.githubusercontent.com/24917424/192080873-70d0535c-4e15-4c5a-8465-7bbb75ffa4ea.MP4
+
+
 # Usage
 ## 1527
 4Bits data <---> 2Bits data  
