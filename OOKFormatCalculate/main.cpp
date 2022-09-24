@@ -13,7 +13,7 @@
 using namespace std;
 
 int anyBS2DEC(string s,int radix){    //Any base to DEC. s for incoming string, radix for it's BS
-    int ans=0;
+    unsigned int ans=0;
     for(char t : s)
     {
         if(t>='0'&&t<='9') ans=ans*radix+t-'0';
@@ -26,7 +26,7 @@ string DEC2anyBS(int n,int radix){    //DEC to any base. n for incoming numbers(
 
     string ans = "";
     do{
-        int t=n%radix;
+        unsigned int t=n%radix;
         if(t>=0&&t<=9)    ans+=t+'0';
         else ans+=t-10+'a';
         n/=radix;
@@ -68,7 +68,7 @@ string makeShortestGrain(int numOfGrain){//the number of meaningless "0" in inpu
 string detectShortestGrainSize(string dataFromURH){
     //check how many meaningless "0" in the data from URH, e.g. 1111, then return 4(int). start looking since 10
     //查看来自URH的数据里面高电平的粒度是什么，例如是不是1111，从10个1开始找
-    int tes1t;
+    unsigned int tes1t;
     for (tes1t = 10; tes1t > 0; tes1t --) {
 
         if (dataFromURH.find(makeShortestGrain(tes1t)) != string::npos)
@@ -114,7 +114,7 @@ string replaceMeaningless0WithSpace(string i2262URH){ //replace those meaningles
 string putTheCodeIntoArray(string iCodeThatAlreadySeperatedByA){
     string line = "1 1 111 111 1 1 1 111 1 1 1 1 1 1 1 1 111 111 1 1 1 1 1 1 1";
     string oCodeThatInArray[25];
-    int i = 0;
+    unsigned int i = 0;
     stringstream ssin(line);
     while (ssin.good() && i < 25){
         ssin >> oCodeThatInArray[i];
@@ -129,9 +129,9 @@ string putTheCodeIntoArray(string iCodeThatAlreadySeperatedByA){
 void outputAClearResult(string explainContent, string result, string ADFormat){
 //    cout << explainContent << result << ADFormat << endl;
 	//detect how long the result is, then put the result into an int variable
-    int resultLength = result.length();
+    unsigned long resultLength = result.length();
     //detect how long the explainContent is, then put the explainContent into an int variable
-    int explainContentLength = explainContent.length();
+    unsigned long explainContentLength = explainContent.length();
     //out put spaces which is as long as explainContentLength
     for (int i = 0; i < explainContentLength; i++) {
         cout << " ";
@@ -291,7 +291,7 @@ int main(){
             cout << " ┌┐ ┌┐ ┌──┐ ┌──┐ ┌┐ ┌──┐ ┌┐ \n";
             cout << " ││ ││ │  │ │  │ ││ │  │ ││ \n";
             cout << "─┘└─┘└─┘  └─┘  └─┘└─┘  └─┘└─\n";
-            cout << " N  N    W    W   N   W   S  \n>";
+            cout << " .  .   -    -    .   -   .  \n>";
             cin >> i2262WS;
             if (size(i2262WS) == 24) {//detect is user inputted correct code
                 //inputted correct
@@ -304,9 +304,9 @@ int main(){
                 goto startInput2262WS;
             }
             startCalculate2262WS:
-            replace_mod(i2262WS, "NN", "0");
-            replace_mod(i2262WS, "NW", "F");
-            replace_mod(i2262WS, "WW", "1");
+            replace_mod(i2262WS, "..", "0");
+            replace_mod(i2262WS, ".-", "F");
+            replace_mod(i2262WS, "--", "1");
             if (size(i2262WS) == 12) {//check if the output is correct
                 //output is correct
                 goto startOutput3Bit2262;
@@ -337,9 +337,9 @@ int main(){
                 goto startInput22623B;
             }
             startCalculate2262WS23B:
-            replace_mod(i2262B3, "0", "NN");
-            replace_mod(i2262B3, "1", "WW");
-            replace_mod(i2262B3, "F", "NW");
+            replace_mod(i2262B3, "0", "..");
+            replace_mod(i2262B3, "1", "--");
+            replace_mod(i2262B3, "F", ".-");
             if (size(i2262B3) == 24) {//check if output is correct. the S is manually IO::cout so in here it is 24
                 goto startOutput242262WS;
             }else{
@@ -349,7 +349,7 @@ int main(){
             startOutput242262WS:
 //            cout << "demodulated wave form of it is " + i2262B3 + "S" + "\ne.g." << "\n";
             outputAClearResult("demodulated wave form of it is:", i2262B3 + "S","AAAAAAAAAAAAAAAADDDDDDDDS");
-            cout << " N  N   W    W   N    W  S  \n";
+            cout << " .  .   -    -   .    -  .  \n";
             cout << " ┌┐ ┌┐ ┌──┐ ┌──┐ ┌┐ ┌──┐ ┌┐ \n";
             cout << " ││ ││ │  │ │  │ ││ │  │ ││ \n";
             cout << "─┘└─┘└─┘  └─┘  └─┘└─┘  └─┘└─\n";
@@ -631,12 +631,12 @@ int main(){
             //check the array one by one and if one of the number is bigger than the average, then add W into NWModeOfCode, if not, add N into NWModeOfCode
             for (int number = 0; number < spaceCount; number++) {
                 if (stoi(oCodeThatInArray[number]) > average) {
-                    NWModeOfCode = NWModeOfCode +"W";
+                    NWModeOfCode = NWModeOfCode +"-";
                 }else{
-                    NWModeOfCode = NWModeOfCode + "N";
+                    NWModeOfCode = NWModeOfCode + ".";
                 }
             }
-			cout << "NWModeOfGeneralCode:";
+			cout << ".-ModeOfGeneralCode:";
 			cout << NWModeOfCode;
 			cout << "\n";
 
