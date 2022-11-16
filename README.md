@@ -5,7 +5,6 @@ JS+HTML web app is OTW.
 
 https://user-images.githubusercontent.com/24917424/192080873-70d0535c-4e15-4c5a-8465-7bbb75ffa4ea.MP4
 
-
 # Usage
 ## 1527
 4Bits data <---> 2Bits data  
@@ -13,11 +12,9 @@ Data demodulated by URH ----> 4Bits data of 1527
 e.g.  
 ``H0FF1FHFHH0100``<--->``100001011101100110100100``  
 ``111010001000100010001110100011101110111010001110111010001000111011101000111010000111010001000100010`` ---> `H0FF1FHFHH 1000`
-## 2262
-3Bits data <---> Demodulated waveform  
+## 2262 
 3Bits data <---- Data demodulated by URH  
-e.g.  
-``001FFF101FFF1``<--->``NNNNWWNWNWNWWWNNWWNWNWNWWW``  
+e.g.   
 ``100010001110111010001001001110100010001000100100010001000100011101110100010001000100010001000100``---->``010F000010000``  
 ## general
 Data demodulated by URH ----> 2Bits general data 
@@ -31,7 +28,7 @@ There is a sync code in the end of each frame of 2262/2260/1527 Signal. It makes
 ## About the DIP switch  
 If your are trying to put your code that decoded by this script into a DIP switch fob, you should check that if your ``data code`` is one of them: ``0001`` ``0010`` ``0100`` ``1000``, and if NOT, then the DIP switch fob won't work correctly. In this case you should buy a fob that able to replay.
 # Note  
-This repo is just a tool to decode data from URH or calculate data/code/waveform in different format, which mainly progressing strings, if you are looking for a tool to progress/demodulate raw files/ HEX datas like ```.complex``` or ```.C16```, pls refer to these project below:  
+This repo is just a tool to decode data from URH or calculate data/code/waveform in different format, which mainly operates strings, if you are looking for a tool to operate/demodulate raw files or HEX datas like ```.complex``` or ```.C16```, pls refer to these project below:  
 [URH](https://github.com/jopohl/urh)  
 [rtl-433](https://github.com/merbanan/rtl_433)  
 [ooktools](https://github.com/leonjza/ooktools)   
@@ -40,6 +37,9 @@ If you are trying to brute force an OOK device, please try these project below:
 [OpenSesame](https://github.com/samyk/opensesame)  
 [PortapackMayhem](https://github.com/eried/portapack-mayhem)  
 [2262Scan](https://github.com/zxkmm/2262Scan)
+
+# requirements
+C++11
 # i18n
 [中文](https://github.com/zxkmm/OOKFormatCalculate/blob/main/Chinese.md)
 # Credit

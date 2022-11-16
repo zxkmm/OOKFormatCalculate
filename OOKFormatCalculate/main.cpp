@@ -159,7 +159,11 @@ void outputAClearResult(string explainContent, string result, string ADFormat){
     cout << "\n";
 }
 
-
+//RT
+int getLengthOfVariable(string variableName){
+    int lengthOfVariable = variableName.length();
+    return lengthOfVariable;
+}
 
 //string identifyNWMode(){
 //				int number = 0;
@@ -190,7 +194,7 @@ void outputAClearResult(string explainContent, string result, string ADFormat){
 //}
 
 int main(){
-    cout << "\n----\nPress 1 for 4Bits 1527 code to 2Bits\ne.g.H0FF1FHFHH>>10000101110110011010\n----\nPress 2 for 2Bits 1527 code to 4Bits\ne.g. 10000101110110011010>>H0FF1FHFHH\n----\nPress 3 for demodulated wave form to 3Bit 2262 code\ne.g. NNNNWWNNNNNWNNNWNNNWNNNNS>>00100F0F0F00\n----\nPress 4 for 3Bit 2262 code to demodulated wave form\n(Kinda useless but i just put it here in case if someone really need it :))\ne.g. 00100F0F0F00>>NNNNWWNNNNNWNNNWNNNWNNNNS\n----\nPress 5 for demodulated 2262/2260 from URH to static 2262/2260 code\n----\nPress 6 for demodulated 1527 from URH to static 1527 code\n----\nPress 7 for general decode e.g. Tesla/K5 Morining/Car keys\n----\nPress 99 to exit.\n";
+    cout << "\n----\nPress 1 for 4Bits 1527 code to 2Bits\ne.g.H0FF1FHFHH>>10000101110110011010\n----\nPress 2 for 2Bits 1527 code to 4Bits\ne.g. 10000101110110011010>>H0FF1FHFHH\n----\nPress 5 for demodulated 2262/2260 from URH to static 2262/2260 code\n----\nPress 6 for demodulated 1527 from URH to static 1527 code\n----\nPress 7 for general decode e.g. Tesla/K5 Morining/Car keys\n----\nPress 99 to exit.\n";
     startplace:
     cout << "Your choice:\n>";
     int select;
@@ -202,10 +206,10 @@ int main(){
             cout << "Input 4Bits 1527 code(Without data code):\n>";
             cin >> i1527B4;
             //detect if user inputted right code
-            if(size(i1527B4) == 10){//size right
+            if(getLengthOfVariable(i1527B4) == 10){//size right
                 //size right
                 goto start15274to2work;
-            }else if (size(i1527B4) == 14){//inputted data code
+            }else if (getLengthOfVariable(i1527B4) == 14){//inputted data code
                 cout << "It seems you inputted the data code, please only input address code.\n";
                 goto startplace;
             }else{//unknown size
@@ -220,8 +224,8 @@ int main(){
             o1527B2 = DEC2anyBS(anyBS2DEC(i1527B4, 4), 2);
             //												cout  <<"2Bit of it is " + DEC2anyBS(anyBS2DEC(i1527B4, 4), 2) << "\n";
 
-            if (size(o1527B2)<20){//In case if the 4 base (4Bit) data started with 0;
-                for (long length = size(o1527B2); length < 20; length ++) {
+            if (getLengthOfVariable(o1527B2)<20){//In case if the 4 base (4Bit) data started with 0;
+                for (long length = getLengthOfVariable(o1527B2); length < 20; length ++) {
                     //																				cout << length;//DBG
                     //																				cout << "\n";//DBG
                     o1527B2 = "0" + o1527B2;
@@ -230,10 +234,10 @@ int main(){
             //            break;
             //												cout << size(o1527B2);//DBG
             //detect if the size is correct
-            if(size(o1527B2) != 20){
+            if(getLengthOfVariable(o1527B2) != 20){
                 cout << "Error, maybe share the address code with the developer.\n";
                 cout << "Error code is:";
-                cout << size(o1527B2);
+                cout << getLengthOfVariable(o1527B2);
                 cout << o1527B2;
                 cout << "\n";
                 goto startplace;
@@ -249,10 +253,10 @@ int main(){
             cout << "Input 2Bits 1527 code(Without data code):\n>";
             cin >> i1527B2;
             //detect if user inputted right code
-            if(size(i1527B2) == 20){//size right
+            if(getLengthOfVariable(i1527B2) == 20){//size right
                 //size right
                 goto start15272to4work;
-            }else if (size(i1527B2) == 24){//inputted data code
+            }else if (getLengthOfVariable(i1527B2) == 24){//inputted data code
                 cout << "It seems you inputted the data code, please only input address code.";
                 goto startplace;
             }else{//unknown size
@@ -264,14 +268,14 @@ int main(){
             replace_mod(o1527B4, "1", "F");
             replace_mod(o1527B4, "3", "1");
             replace_mod(o1527B4, "2", "H");
-            if (size(o1527B4)<10){//In case if the 2 base (2Bit) data started with 0;
-                for (long length = size(o1527B4); length < 10; length ++) {
+            if (getLengthOfVariable(o1527B4)<10){//In case if the 2 base (2Bit) data started with 0;
+                for (long length = getLengthOfVariable(o1527B4); length < 10; length ++) {
                     //																				cout << length;//DBG
                     //																				cout << "\n";//DBG
                     o1527B4 = "0" + o1527B4;
                 }
             }
-            if (size(o1527B4) == 10) {//check if the output is correct
+            if (getLengthOfVariable(o1527B4) == 10) {//check if the output is correct
                 //if correct
                 goto startOutput1527B4;
             } else{
@@ -293,10 +297,10 @@ int main(){
             cout << "─┘└─┘└─┘  └─┘  └─┘└─┘  └─┘└─\n";
             cout << " .  .   -    -    .   -   .  \n>";
             cin >> i2262WS;
-            if (size(i2262WS) == 24) {//detect is user inputted correct code
+            if (getLengthOfVariable(i2262WS) == 24) {//detect is user inputted correct code
                 //inputted correct
                 goto startCalculate2262WS;
-            }else if (size(i2262WS) == 25){
+            }else if (getLengthOfVariable(i2262WS) == 25){
                 cout << "you inputted code within sync code, you should remove sync code and try again.";
                 goto startInput2262WS;
             }else{
@@ -307,7 +311,7 @@ int main(){
             replace_mod(i2262WS, "..", "0");
             replace_mod(i2262WS, ".-", "F");
             replace_mod(i2262WS, "--", "1");
-            if (size(i2262WS) == 12) {//check if the output is correct
+            if (getLengthOfVariable(i2262WS) == 12) {//check if the output is correct
                 //output is correct
                 goto startOutput3Bit2262;
             }else{
@@ -327,20 +331,20 @@ int main(){
             startInput22623B:
             cout << "Input ternary 2262 code:\n>";
             cin >> i2262B3;
-            if (size(i2262B3) == 12) {//check if user inputted right 2262 3 bit code
+            if (getLengthOfVariable(i2262B3) == 12) {//check if user inputted right 2262 3 bit code
                 goto startCalculate2262WS23B;
             }else{
                 cout << "It seems you inputted wrong code, please try again";
                 cout << "\n";
                 cout << "the code you inputed is" + i2262B3 +"and the size is";
-                cout << size(i2262B3);
+                cout << getLengthOfVariable(i2262B3);
                 goto startInput22623B;
             }
             startCalculate2262WS23B:
             replace_mod(i2262B3, "0", "..");
             replace_mod(i2262B3, "1", "--");
             replace_mod(i2262B3, "F", ".-");
-            if (size(i2262B3) == 24) {//check if output is correct. the S is manually IO::cout so in here it is 24
+            if (getLengthOfVariable(i2262B3) == 24) {//check if output is correct. the S is manually IO::cout so in here it is 24
                 goto startOutput242262WS;
             }else{
                 cout << "Error, maybe share 3Bit 2262 code with developer.";
@@ -436,6 +440,20 @@ int main(){
             cout << "Input 1527 demodulated code from URH:\n>";
             cin >> line;
             line = replaceMeaningless0WithSpace(line);
+
+            //检测line这个字符串当中有多少个由空格分开的部分，如果由空格分开的部分小于25或者大于26，就提示异常
+            int count = 0;
+            for (int i = 0; i < line.length(); i++) {
+                if (line[i] == ' ') {
+                    count++;
+                }
+            }
+            if (count != 25) {
+                cout << "Error: you inputed too less or too many data, it could happen if the encoder is not 1527. the data you inputed has "  << count << " wave crest, but 1527 should be be 25 \n";
+                goto startplace;
+            }
+
+
             //												cout << "replaced is " + line + "\n"; //DBG
             //												string line = "1 1 111 111 1 1 1 111 1 1 1 1 1 1 1 1 111 111 1 1 1 1 1 1 1"; //DBG
             string oCodeThatInArray[25];
