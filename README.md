@@ -31,7 +31,7 @@ There is a sync code in the end of each frame of 2262/2260/1527 Signal. It makes
 ## About the DIP switch  
 If your are trying to put your code that decoded by this script into a DIP switch fob, you should check that if your ``data code`` is one of them: ``0001`` ``0010`` ``0100`` ``1000``, and if NOT, then the DIP switch fob won't work correctly. In this case you should buy a fob that able to replay.
 # Note  
-This repo is just a tool to decode data from URH or calculate data/code/waveform in different format, which mainly progressing strings, if you are looking for a tool to progress/demodulate raw files/ HEX datas like ```.complex``` or ```.C16```, pls refer to these project below:  
+This repo is just a tool to decode data from URH or calculate data/code/waveform in different format, which mainly operates strings, if you are looking for a tool to operate/demodulate raw files or HEX datas like ```.complex``` or ```.C16```, pls refer to these project below:  
 [URH](https://github.com/jopohl/urh)  
 [rtl-433](https://github.com/merbanan/rtl_433)  
 [ooktools](https://github.com/leonjza/ooktools)   
