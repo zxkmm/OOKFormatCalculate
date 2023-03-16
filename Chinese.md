@@ -7,7 +7,11 @@
 适用于ASK/OOK调制  
 其他编码器正在编写.
 JS+HTML 网页 app 正在编写.  
-[网页版(代码不一定是最新的)](https://onlinegdb.com/M6MxGi82p)
+[网页版(代码不一定是最新的)](https://onlinegdb.com/LZ19njmf9)  
+
+https://user-images.githubusercontent.com/24917424/192080873-70d0535c-4e15-4c5a-8465-7bbb75ffa4ea.MP4  
+
+
 # 用法
 ## 1527编码芯片
 4位 1527 数据 <---> 2位 1527 数据  

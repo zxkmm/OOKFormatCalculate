@@ -1,7 +1,7 @@
 # OOKFormatCalculate
-Other encoders is OTW.
-JS+HTML web app is OTW.
-[WebVersion](https://onlinegdb.com/M6MxGi82p)
+Other encoders is OTW.  
+JS+HTML web app is OTW.  
+[WebVersion](https://onlinegdb.com/LZ19njmf9)  
 
 https://user-images.githubusercontent.com/24917424/192080873-70d0535c-4e15-4c5a-8465-7bbb75ffa4ea.MP4
 
