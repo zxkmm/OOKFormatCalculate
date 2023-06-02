@@ -74,11 +74,11 @@ std::string Algo1527_2242::decode1527FromUrh(std::string stringOf1527WaveformFro
         int oCodeThatInArrayInt = stoi(oCodeThatInArray[number]);
         if (oCodeThatInArrayInt <= average) {
             NWModeOfCode = NWModeOfCode + N;
-            std::cout << "$\n"+NWModeOfCode+"\n" << std::endl;
+//            std::cout << "$\n"+NWModeOfCode+"\n" << std::endl;
             //																				cout << "\n追加n\n"; //DBG
         } else if (oCodeThatInArrayInt > average) {
             NWModeOfCode = NWModeOfCode + W;
-            std::cout << "@\n"+NWModeOfCode+"\n" << std::endl;
+//            std::cout << "@\n"+NWModeOfCode+"\n" << std::endl;
             //																				cout << "\n 追加w \n"; //DBG
         } else {
 //            cout << "Error: the average is " << average << " and the number is " << oCodeThatInArray[number] << endl;
