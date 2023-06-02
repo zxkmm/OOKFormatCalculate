@@ -6,8 +6,7 @@
 # OOK调制解码/转换器
 适用于ASK/OOK调制  
 其他编码器正在编写.
-JS+HTML 网页 app 正在编写.  
-[网页版(代码不一定是最新的)](https://onlinegdb.com/LZ19njmf9)  
+JS+HTML 网页 app 正在编写.
 
 https://user-images.githubusercontent.com/24917424/192080873-70d0535c-4e15-4c5a-8465-7bbb75ffa4ea.MP4  
 
