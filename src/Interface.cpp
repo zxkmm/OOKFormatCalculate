@@ -45,7 +45,8 @@ int Interface::mainMenu() {
               << "----\nPress 3 for for 4Bits 1527 code to 2Bits\n"
               << "----\nPress 4 for 2Bits 1527 code to 4Bits\n"
               << "----\nPress 5 for general decode e.g. Tesla/K5 Morining/Car keys\n"
-              << "----\nPress 99 to exit.\n";
+              << "----\nPress 99 to exit.\n"
+              << "\nChoice:";
 
     int choice;
     std::cin >> choice;
@@ -57,6 +58,9 @@ int Interface::mainMenu() {
             std::cin >> userInputed2262CodeFromUrh;
             Interface::outputAClearResult("static 2262 code is:",
                                           decodeCase1.decode2262FromUrh(userInputed2262CodeFromUrh), "AAAAAAAADDDD");
+            //press any key to continue
+
+
             return 1;
         }
         case 2: {//demodulated 1527/2242 from URH to static 1527/2242 code
@@ -66,6 +70,9 @@ int Interface::mainMenu() {
             std::cin >> userInputed1527CodeFromUrh;
             Interface::outputAClearResult("static 1527 code is:",
                                           decodeCase2.decode1527FromUrh(userInputed1527CodeFromUrh), "AAAAAAAAAADDDD");
+
+            //press any key to continue
+
             return 1;
         }
         case 3: {//4Bits 1527 code to 2Bits

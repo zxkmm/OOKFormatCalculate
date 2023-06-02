@@ -6,19 +6,12 @@
 
 std::string Algo1527_2242::decode1527FromUrh(std::string stringOf1527WaveformFromUrh) {
 
-
     //desired 01
-
 
     StringUnit stringUnit;
     std::ostringstream ossCode;
     std::string decoded1527 = "";
     stringOf1527WaveformFromUrh = stringUnit.removeNonDesiredCharacters(stringOf1527WaveformFromUrh, "01");
-
-
-//    string stringOf1527WaveformFromUrh = "";
-//    cout << "Input 1527 demodulated code from URH:\n>";
-//    cin >> stringOf1527WaveformFromUrh;
     stringOf1527WaveformFromUrh = stringUnit.replaceMeaningless0WithSpace(stringOf1527WaveformFromUrh);
 
     //检测line这个字符串当中有多少个由空格分开的部分，如果由空格分开的部分小于25或者大于26，就提示异常
@@ -36,15 +29,10 @@ std::string Algo1527_2242::decode1527FromUrh(std::string stringOf1527WaveformFro
 
         return decoded1527;
 
-
-//        cout
-//                << "Error: you inputed too less or too many data, it could happen if the encoder is not 1527. the data you inputed has "
-//                << count << " wave crest, but 1527 should be be 25 \n";
-//        goto startplace;
     }
 
 
-    //												cout << "replaced is " + stringOf1527WaveformFromUrh + "\n"; //DBG
+//    std::cout << "replaced is " + stringOf1527WaveformFromUrh + "\n"; //DBG
     //												string stringOf1527WaveformFromUrh = "1 1 111 111 1 1 1 111 1 1 1 1 1 1 1 1 111 111 1 1 1 1 1 1 1"; //DBG
     std::string oCodeThatInArray[25];
     std::string oDataCodeThatInArray[4];
@@ -54,12 +42,15 @@ std::string Algo1527_2242::decode1527FromUrh(std::string stringOf1527WaveformFro
         ssin >> oCodeThatInArray[i];
         ++i;
     }
-    //												cout << "\nDBG:oCodeThatInArray:";
-    //												for(int i = 0;i<26;i++){//DBG
-    //																cout << oCodeThatInArray[i];
-    //																cout << " ";
-    //												}
-    //												cout << "\n";
+
+    //now oCodeThatInArray[] still contains address code and sync bit
+
+//    std::cout << "\nDBG:oCodeThatInArray:";
+//    for(int i = 0;i<26;i++){//DBG
+//                    std::cout << oCodeThatInArray[i];
+//                    std::cout << " ";
+//    }
+//    std::cout << "\n";
 
 
     //Calculate the average	of the array
@@ -67,7 +58,9 @@ std::string Algo1527_2242::decode1527FromUrh(std::string stringOf1527WaveformFro
     for (const auto &i: oCodeThatInArray) {
         sum += stoi(i);
     }
-    int average = sum / 25;                                                //												for(i = 0; i < 25; i++){//DBG
+    int average = sum / 25;
+//    std::cout << "\nDBG:average: " << average << std::endl;//DBG
+    //												for(i = 0; i < 25; i++){//DBG
     //																cout << oCodeThatInArray[i] << endl;
     //												}
     //												return oCodeThatInArray[24];
@@ -81,9 +74,11 @@ std::string Algo1527_2242::decode1527FromUrh(std::string stringOf1527WaveformFro
         int oCodeThatInArrayInt = stoi(oCodeThatInArray[number]);
         if (oCodeThatInArrayInt <= average) {
             NWModeOfCode = NWModeOfCode + N;
+            std::cout << "$\n"+NWModeOfCode+"\n" << std::endl;
             //																				cout << "\n追加n\n"; //DBG
         } else if (oCodeThatInArrayInt > average) {
             NWModeOfCode = NWModeOfCode + W;
+            std::cout << "@\n"+NWModeOfCode+"\n" << std::endl;
             //																				cout << "\n 追加w \n"; //DBG
         } else {
 //            cout << "Error: the average is " << average << " and the number is " << oCodeThatInArray[number] << endl;
@@ -101,15 +96,14 @@ std::string Algo1527_2242::decode1527FromUrh(std::string stringOf1527WaveformFro
     //																cout << oDataCodeThatInArray[i];
     //												}
 
+    for (i = 0; i < 4; i++) {//this is for data code
+        oDataCodeThatInArray[i] = NWModeOfCode.substr(NWModeOfCode.length() - i - 2, 1);
+//        std::cout <<"!101"<< oDataCodeThatInArray[i]; //DBG
+    }
+
     //cut the last 5 characters of NWModeOfCode, which means delete the last 5 characters aka data code and sync code.
     NWModeOfCode = NWModeOfCode.substr(0, NWModeOfCode.length() - 5);
-    //												cout << "\nDBG:NWModeOfCode: " << NWModeOfCode << endl;
-
-    //cut last 1 characters of NWModeOfCode and assign to oDataCodeThatInArray, which means seperated the last 5 characters aka data code + sync code, and put them into oDataCodeThatInArray, and take care if it later
-    for (i = 0; i < 4; i++) {//DBG
-        oDataCodeThatInArray[i] = NWModeOfCode.substr(i, 1);
-        //																cout << oDataCodeThatInArray[i];
-    }
+//    std::cout << "\nDBG:NWModeOfCode: " << NWModeOfCode << std::endl;//this without data code and sync code//DBG
 
     long n = NWModeOfCode.length();//separate NWModeOfCode per 2 char by space, -4 is for remove the data code temp.ly
     while (n - 2 > 0) {
@@ -128,7 +122,7 @@ std::string Algo1527_2242::decode1527FromUrh(std::string stringOf1527WaveformFro
 
     //now take care of last 5 characters aka data code and sync code.
     //replace all W into 1 and all	N into 0 in oDataCodeThatInArray
-    for (i = 0; i < 4; i++) {//DBG
+    for (i = 0; i < 4; i++) {
         if (oDataCodeThatInArray[i] == W) {
             oDataCodeThatInArray[i] = "1";
         } else if (oDataCodeThatInArray[i] == N) {
@@ -173,6 +167,12 @@ std::string Algo1527_2242::decode1527FromUrh(std::string stringOf1527WaveformFro
     }
     //print a space and oDataCodeThatInArray aka data code
     //												cout << " ";
+
+    //revert oDAtaCodeThatInArray e.g. 0001 to 1000
+    std::reverse(std::begin(oDataCodeThatInArray), std::end(oDataCodeThatInArray));
+
+
+
     for (i = 0; i < 4; i++) {// print data code
         ossCode << oDataCodeThatInArray[i];
     }

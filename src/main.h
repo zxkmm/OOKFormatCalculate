@@ -5,6 +5,8 @@
 #ifndef OOKFORMATCALCULATE_MAIN_H
 #define OOKFORMATCALCULATE_MAIN_H
 
+#include <iostream>
+#include <cstdlib>
 
 int main();
 
