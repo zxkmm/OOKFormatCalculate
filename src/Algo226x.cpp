@@ -6,6 +6,8 @@
 
 std::string Algo226x::decode2262FromUrh(std::string stringOf2262WaveformFromUrh) {
 
+    //desired 01
+
     /**
     流程：
     1:找到高电平的无意义的1的个数（肯定是大于2且大于低电平）
@@ -17,6 +19,8 @@ std::string Algo226x::decode2262FromUrh(std::string stringOf2262WaveformFromUrh)
     */
 
     StringUnit stringUnit;
+
+    stringOf2262WaveformFromUrh = stringUnit.removeNonDesiredCharacters(stringOf2262WaveformFromUrh, "01");
 
 //    string stringOf2262WaveformFromUrh = "";
 //    cout << "Input 2262/2260 demodulated code from URH:\n>";

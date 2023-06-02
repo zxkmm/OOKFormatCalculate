@@ -32,6 +32,8 @@ public:
     int anyBS2DEC(std::string s, int radix);
 
     std::string DEC2anyBS(int n, int radix);
+
+    std::string removeNonDesiredCharacters(const std::string& str, const std::string& desiredChars);
 };
 
 

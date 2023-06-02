@@ -5,9 +5,16 @@
 #include "Algo1527_2242.h"
 
 std::string Algo1527_2242::decode1527FromUrh(std::string stringOf1527WaveformFromUrh) {
+
+
+    //desired 01
+
+
     StringUnit stringUnit;
     std::ostringstream ossCode;
     std::string decoded1527 = "";
+    stringOf1527WaveformFromUrh = stringUnit.removeNonDesiredCharacters(stringOf1527WaveformFromUrh, "01");
+
 
 //    string stringOf1527WaveformFromUrh = "";
 //    cout << "Input 1527 demodulated code from URH:\n>";
@@ -186,8 +193,11 @@ std::string Algo1527_2242::decode1527FromUrh(std::string stringOf1527WaveformFro
 
 std::string Algo1527_2242::trans4Bit1527To2Bit(std::string i1527B4) {
 
+    //desired 01HF
+
     StringUnit stringUnit;
 
+    i1527B4 = stringUnit.removeNonDesiredCharacters(i1527B4, "01HF");
 
 //    std::string i1527B4;
     std::string o1527B2;
@@ -235,7 +245,8 @@ std::string Algo1527_2242::trans4Bit1527To2Bit(std::string i1527B4) {
 //        cout << getLengthOfVariable(o1527B2);
 //        cout << o1527B2;
 //        cout << "\n";
-        o1527B2 = "Error, maybe share the address code with the developer.\n Error code is:" + std::to_string(stringUnit.getLengthOfVariable(o1527B2)) + o1527B2 + "\n";
+        o1527B2 = "Error, maybe share the address code with the developer.\n Error code is:" +
+                  std::to_string(stringUnit.getLengthOfVariable(o1527B2)) + o1527B2 + "\n";
         return o1527B2;
 
 
@@ -246,29 +257,33 @@ std::string Algo1527_2242::trans4Bit1527To2Bit(std::string i1527B4) {
 //        outputAClearResult("2Bit code if it is:", o1527B2, "AAAAAAAAAAAAAAAAAAAA + Your data code");
 //        cout << "\n----\nmain menu\n----\n";
 //        goto startplace;
-    return o1527B2;
+        return o1527B2;
     }
 }
 
-std::string Algo1527_2242::trans2Bit1527To4Bit(std::string i1527B2){
+std::string Algo1527_2242::trans2Bit1527To4Bit(std::string i1527B2) {
+
+    //desired 01
 
     std::string o1527B4;
 
     StringUnit stringUnit;
 
+    i1527B2 = stringUnit.removeNonDesiredCharacters(i1527B2, "01");
+
 //    string i1527B2;
 //    cout << "Input 2Bits 1527 code(Without data code):\n>";
 //    cin >> i1527B2;
     //detect if user inputted right code
-    if(stringUnit.getLengthOfVariable(i1527B2) == 20){//size right
+    if (stringUnit.getLengthOfVariable(i1527B2) == 20) {//size right
         //size right
         goto start15272to4work;
-    }else if (stringUnit.getLengthOfVariable(i1527B2) == 24){//inputted data code
+    } else if (stringUnit.getLengthOfVariable(i1527B2) == 24) {//inputted data code
 //        cout << "It seems you inputted the data code, please only input address code.";
         o1527B4 = "It seems you inputted the data code, please only input address code.";
         return o1527B4;
 //        goto startplace;
-    }else{//unknown size
+    } else {//unknown size
 //        cout << "You inputted a wrong code. Please make sure you inputted 1527 address code.";
         o1527B4 = "You inputted a wrong code. Please make sure you inputted 1527 address code.";
         return o1527B4;
@@ -279,8 +294,8 @@ std::string Algo1527_2242::trans2Bit1527To4Bit(std::string i1527B2){
     stringUnit.replace_mod(o1527B4, "1", "F");
     stringUnit.replace_mod(o1527B4, "3", "1");
     stringUnit.replace_mod(o1527B4, "2", "H");
-    if (stringUnit.getLengthOfVariable(o1527B4)<10){//In case if the 2 base (2Bit) data started with 0;
-        for (long length = stringUnit.getLengthOfVariable(o1527B4); length < 10; length ++) {
+    if (stringUnit.getLengthOfVariable(o1527B4) < 10) {//In case if the 2 base (2Bit) data started with 0;
+        for (long length = stringUnit.getLengthOfVariable(o1527B4); length < 10; length++) {
             //																				cout << length;//DBG
             //																				cout << "\n";//DBG
             o1527B4 = "0" + o1527B4;
@@ -289,7 +304,7 @@ std::string Algo1527_2242::trans2Bit1527To4Bit(std::string i1527B2){
     if (stringUnit.getLengthOfVariable(o1527B4) == 10) {//check if the output is correct
         //if correct
         goto startOutput1527B4;
-    } else{
+    } else {
 //        cout << "Error, maybe share the address code with the developer";
         o1527B4 = "Error, maybe share the address code with the developer";
         return o1527B4;

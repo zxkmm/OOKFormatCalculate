@@ -7,7 +7,6 @@
 
 int main() {
     Interface interface;
-    interface.mainMenu();
     if (interface.mainMenu() == 1) {
         interface.mainMenu();
     }

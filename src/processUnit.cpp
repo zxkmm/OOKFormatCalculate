@@ -115,3 +115,13 @@ int StringUnit::getLengthOfVariable(std::string variableName) {
     int lengthOfVariable = variableName.length();
     return lengthOfVariable;
 }
+
+std::string StringUnit::removeNonDesiredCharacters(const std::string& str, const std::string& desiredChars) {
+    std::string result;
+    for (char c : str) {
+        if (desiredChars.find(c) != std::string::npos) {
+            result += c;
+        }
+    }
+    return result;
+}
