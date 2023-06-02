@@ -5,6 +5,19 @@ JS+HTML web app is OTW.
 
 https://user-images.githubusercontent.com/24917424/192080873-70d0535c-4e15-4c5a-8465-7bbb75ffa4ea.MP4
 
+# Compile
+```angular2html
+git clone https://github.com/zxkmm/OOKFormatCalculate.git
+cd OOKFormatCalculate
+mkdir build
+cd build
+cmake ..
+make
+```
+
+# Run
+``./OOKFormatCalculate``
+
 # Usage
 ## 1527/2242
 ### Calculate between common code and Portapack code
@@ -31,6 +44,7 @@ There is a sync code in the end of each frame of 2262/2260/1527 Signal. It makes
 
 ## About the DIP switch  
 If your are trying to put your code that decoded by this script into a DIP switch fob, you should check that if your ``data code`` is one of them: ``0001`` ``0010`` ``0100`` ``1000``, and if NOT, then the DIP switch fob won't work correctly. In this case you should buy a fob that able to replay.
+
 
 # Note if you got a 2262 code
 If your fob is 1527/2242 but accidently doesn't contain ``H`` in it, it might be recongnized as 2262. It's not preventable but the sync bit is different among of them, which means they have different waveform. So if you decoded something as 2262 and it doesn't work, you should try same code but in 1527/2242 protocol.
