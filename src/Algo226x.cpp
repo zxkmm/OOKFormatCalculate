@@ -22,12 +22,8 @@ std::string Algo226x::decode2262FromUrh(std::string stringOf2262WaveformFromUrh)
 
     stringOf2262WaveformFromUrh = stringUnit.removeNonDesiredCharacters(stringOf2262WaveformFromUrh, "01");
 
-//    string stringOf2262WaveformFromUrh = "";
-//    cout << "Input 2262/2260 demodulated code from URH:\n>";
-//    cin >> stringOf2262WaveformFromUrh;
     stringOf2262WaveformFromUrh = stringUnit.replaceMeaningless0WithSpace(stringOf2262WaveformFromUrh);
-    //												cout << "replaced is " + stringOf2262WaveformFromUrh + "\n"; //DBG
-    //												string stringOf2262WaveformFromUrh = "1 1 111 111 1 1 1 111 1 1 1 1 1 1 1 1 111 111 1 1 1 1 1 1 1"; //DBG
+
     std::string oCodeThatInArray[25];
     int i = 0;
     std::stringstream ssin(stringOf2262WaveformFromUrh);
@@ -42,10 +38,8 @@ std::string Algo226x::decode2262FromUrh(std::string stringOf2262WaveformFromUrh)
     for (const auto &i: oCodeThatInArray) {
         sum += stoi(i);
     }
-    int average = sum / 25;                                                //												for(i = 0; i < 25; i++){//DBG
-    //																cout << oCodeThatInArray[i] << endl;
-    //												}
-    //												return oCodeThatInArray[24];
+    int average = sum / 25;
+
 
     int number = 0;
     std::string NWModeOfCode = "";
@@ -56,44 +50,27 @@ std::string Algo226x::decode2262FromUrh(std::string stringOf2262WaveformFromUrh)
         int oCodeThatInArrayInt = stoi(oCodeThatInArray[number]);
         if (oCodeThatInArrayInt <= average) {
             NWModeOfCode = NWModeOfCode + N;
-            //																				cout << "\n追加n\n"; //DBG
         } else if (oCodeThatInArrayInt > average) {
             NWModeOfCode = NWModeOfCode + W;
-            //																				cout << "\n 追加w \n"; //DBG
         } else {
             std::string error = "Error: the average is " + std::to_string(average) + " and the number is " +
                                 std::string(oCodeThatInArray[number]);
 
             return error;
-//            cout << "Error: the average is " << average << " and the number is " << oCodeThatInArray[number] << endl;
-//            break;
-//            goto THE_END;
         }
     }
-    //												cout << "\n" + NWModeOfCode + "\n"; //DBG
     stringUnit.replace_mod(NWModeOfCode, "NN", "0");
     stringUnit.replace_mod(NWModeOfCode, "NW", "F");
     stringUnit.replace_mod(NWModeOfCode, "WW", "1");
-    //												cout << NWModeOfCode; //DBG
 
 
     //check if there's any "N" or "W" in NWMoDeOfCode
     if (NWModeOfCode.find("N") != std::string::npos || NWModeOfCode.find("W") != std::string::npos) {
         std::string error = "Error: Maybe try 1527. this encoder looks like 1527, if there's still error, maybe share the raw with dev\n";
-//        cout << "Error: Maybe try 1527. this encoder looks like 1527, if there's still error, maybe share the raw with dev\n";
-//        break;
         return error;
-//        goto THE_END;
     }
 
 
-//    cout << "\n----\n";
-//            cout << "Static ternary code of it is " + NWModeOfCode << "\n";
-//    outputAClearResult("static 2262 code is:", NWModeOfCode, "AAAAAAAADDDD");
-//            cout << "                             AAAAAAAADDDD\n";
-//    cout << "----\nmain menu\n----\n";
-//    goto startplace;
     return NWModeOfCode;
-//    THE_END:
 
 }

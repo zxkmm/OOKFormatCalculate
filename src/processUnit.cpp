@@ -106,7 +106,6 @@ std::string putTheCodeIntoArray(std::string iCodeThatAlreadySeperatedByA) {
         ++i;
     }
     for (i = 0; i < 25; i++) {
-//        cout << oCodeThatInArray[i] << endl; //DBG
     }
     return oCodeThatInArray[24];
 }//TODO DEV
@@ -116,9 +115,9 @@ int StringUnit::getLengthOfVariable(std::string variableName) {
     return lengthOfVariable;
 }
 
-std::string StringUnit::removeNonDesiredCharacters(const std::string& str, const std::string& desiredChars) {
+std::string StringUnit::removeNonDesiredCharacters(const std::string &str, const std::string &desiredChars) {
     std::string result;
-    for (char c : str) {
+    for (char c: str) {
         if (desiredChars.find(c) != std::string::npos) {
             result += c;
         }
