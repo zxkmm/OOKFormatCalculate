@@ -12,7 +12,11 @@ std::string Algo1527_2242::decode1527FromUrh(std::string stringOf1527WaveformFro
     std::ostringstream ossCode;
     std::string decoded1527 = "";
     stringOf1527WaveformFromUrh = stringUnit.removeNonDesiredCharacters(stringOf1527WaveformFromUrh, "01");
+//    std::cout << "\n15$" + stringOf1527WaveformFromUrh + "$\n" << std::endl; //DBG
     stringOf1527WaveformFromUrh = stringUnit.replaceMeaningless0WithSpace(stringOf1527WaveformFromUrh);
+//    std::cout << "\n17$" + stringOf1527WaveformFromUrh + "$\n" << std::endl; //DBG
+    stringOf1527WaveformFromUrh = " " + stringOf1527WaveformFromUrh + " ";
+//    std::cout << "\n19$" + stringOf1527WaveformFromUrh + "$\n" << std::endl; //DBG
 
     //检测line这个字符串当中有多少个由空格分开的部分，如果由空格分开的部分小于25或者大于26，就提示异常
     int count = 0;
@@ -21,11 +25,11 @@ std::string Algo1527_2242::decode1527FromUrh(std::string stringOf1527WaveformFro
             count++;
         }
     }
-    if (count != 25) {
+    if (count != 26) {
 
         decoded1527 =
                 "Error: you inputed too less or too many data, it could happen if the encoder is not 1527. the data you inputed has "
-                + std::to_string(count) + " wave crest, but 1527 should be be 25 \n";
+                + std::to_string(count - 1) + " wave crest, but 1527 should be be 25 \n";
 
         return decoded1527;
     }

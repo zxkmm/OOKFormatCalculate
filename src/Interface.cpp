@@ -6,36 +6,40 @@
 #include "AlgoGeneral.h"
 
 void Interface::outputAClearResult(std::string explainContent, std::string result, std::string ADFormat) {
-//    cout << explainContent << result << ADFormat << endl;
     //detect how long the result is, then put the result into an int variable
     unsigned long resultLength = result.length();
+//    std::cout << resultLength << std::endl; //DBG
     //detect how long the explainContent is, then put the explainContent into an int variable
     unsigned long explainContentLength = explainContent.length();
-    //out put spaces which is as long as explainContentLength
-    for (int i = 0; i < explainContentLength; i++) {
-        std::cout << " ";
-    }
-    std::cout << "┏";
-    //output spaces which is as long as resultLength
-    for (int i = 0; i < resultLength; i++) {
-        std::cout << "━";
-    }
-    std::cout << "┓" << std::endl;
-    std::cout << explainContent << "┃" << result << "┃" << std::endl;
-    for (int i = 0; i < explainContentLength; i++) {
-        std::cout << " ";
-    }
-    std::cout << "┗";
-    for (int i = 0; i < resultLength; i++) {
-        std::cout << "━";
-    }
-    std::cout << "┛" << std::endl;
     //output spaces which is as long as explainContentLength
-    for (int i = 0; i < explainContentLength; i++) {
-        std::cout << " ";
+    if (resultLength < 80) {
+        for (int i = 0; i < explainContentLength; i++) {
+            std::cout << " ";
+        }
+        std::cout << "┏";
+        //output spaces which is as long as resultLength
+        for (int i = 0; i < resultLength; i++) {
+            std::cout << "━";
+        }
+        std::cout << "┓" << std::endl;
+        std::cout << explainContent << "┃" << result << "┃" << std::endl;
+        for (int i = 0; i < explainContentLength; i++) {
+            std::cout << " ";
+        }
+        std::cout << "┗";
+        for (int i = 0; i < resultLength; i++) {
+            std::cout << "━";
+        }
+        std::cout << "┛" << std::endl;
+        //output spaces which is as long as explainContentLength
+        for (int i = 0; i < explainContentLength; i++) {
+            std::cout << " ";
+        }
+        std::cout << " " + ADFormat;
+        std::cout << "\n";
+    } else {
+        std::cout << std::endl << result << std::endl;
     }
-    std::cout << " " + ADFormat;
-    std::cout << "\n";
 }
 
 int Interface::mainMenu() {

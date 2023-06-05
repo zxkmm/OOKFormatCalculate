@@ -9,6 +9,7 @@
 int main() {
     Interface interface;
     if (interface.mainMenu() == 1) {
+        std::cout << "\nback to main menu\n";
         interface.mainMenu();
     }
     return 0;
