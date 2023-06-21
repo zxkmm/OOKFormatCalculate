@@ -2,6 +2,8 @@
 // Created by zxkmm.
 //
 
+#define BIT_NUM_1527 24
+
 #include "Algo1527_2242.h"
 
 std::string Algo1527_2242::decode1527FromUrh(std::string stringOf1527WaveformFromUrh) {
@@ -12,11 +14,10 @@ std::string Algo1527_2242::decode1527FromUrh(std::string stringOf1527WaveformFro
     std::ostringstream ossCode;
     std::string decoded1527 = "";
     stringOf1527WaveformFromUrh = stringUnit.removeNonDesiredCharacters(stringOf1527WaveformFromUrh, "01");
+    stringOf1527WaveformFromUrh = "0" + stringOf1527WaveformFromUrh + "0";
 //    std::cout << "\n15$" + stringOf1527WaveformFromUrh + "$\n" << std::endl; //DBG
     stringOf1527WaveformFromUrh = stringUnit.replaceMeaningless0WithSpace(stringOf1527WaveformFromUrh);
 //    std::cout << "\n17$" + stringOf1527WaveformFromUrh + "$\n" << std::endl; //DBG
-    stringOf1527WaveformFromUrh = " " + stringOf1527WaveformFromUrh + " ";
-//    std::cout << "\n19$" + stringOf1527WaveformFromUrh + "$\n" << std::endl; //DBG
 
     //检测line这个字符串当中有多少个由空格分开的部分，如果由空格分开的部分小于25或者大于26，就提示异常
     int count = 0;
@@ -25,7 +26,7 @@ std::string Algo1527_2242::decode1527FromUrh(std::string stringOf1527WaveformFro
             count++;
         }
     }
-    if (count != 26) {
+    if (count != (1 + BIT_NUM_1527 + 1)) {
 
         decoded1527 =
                 "Error: you inputed too less or too many data, it could happen if the encoder is not 1527. the data you inputed has "
@@ -36,11 +37,11 @@ std::string Algo1527_2242::decode1527FromUrh(std::string stringOf1527WaveformFro
 
 
     //std::cout << "replaced is " + stringOf1527WaveformFromUrh + "\n"; //DBG
-    std::string oCodeThatInArray[25];
+    std::string oCodeThatInArray[BIT_NUM_1527 + 1];
     std::string oDataCodeThatInArray[4];
     int i = 0;
     std::stringstream ssin(stringOf1527WaveformFromUrh);
-    while (ssin.good() && i < 26) {
+    while (ssin.good() && i < (1 + BIT_NUM_1527 + 1)) {
         ssin >> oCodeThatInArray[i];
         ++i;
     }
@@ -52,12 +53,14 @@ std::string Algo1527_2242::decode1527FromUrh(std::string stringOf1527WaveformFro
     //    }
     //    std::cout << "\n";
 
-    //Calculate the average	of the array
-    int sum = 0;
+    //avg
+    int sumOfLength = 0;
     for (const auto &i: oCodeThatInArray) {
-        sum += stoi(i);
+        sumOfLength += stringUnit.getLengthOfVariable(i);
     }
-    int average = sum / 25;
+    int averageOfLength = sumOfLength / (BIT_NUM_1527 + 1);
+
+
     //    std::cout << "\nDBG:average: " << average << std::endl;//DBG
     //    for (i = 0; i < 25; i++) {//DBG
     //        cout << oCodeThatInArray[i] << endl;
@@ -71,14 +74,14 @@ std::string Algo1527_2242::decode1527FromUrh(std::string stringOf1527WaveformFro
     for (; number < 25; number++) {//25 is total 1527 wave numbers,24 is for remove the sync code
         //Convert oCodeThatInArray[number] into int
         int oCodeThatInArrayInt = stoi(oCodeThatInArray[number]);
-        if (oCodeThatInArrayInt <= average) {
+        if (std::to_string(oCodeThatInArrayInt).length() <= averageOfLength) {
             NWModeOfCode = NWModeOfCode + N;
 //            std::cout << "$\n"+NWModeOfCode+"\n" << std::endl;
-        } else if (oCodeThatInArrayInt > average) {
+        } else if (std::to_string(oCodeThatInArrayInt).length() > averageOfLength) {
             NWModeOfCode = NWModeOfCode + W;
 //            std::cout << "@\n"+NWModeOfCode+"\n" << std::endl;
         } else {
-            decoded1527 = "Error: the average is " + std::to_string(average) + " and the number is " +
+            decoded1527 = "Error: the average is " + std::to_string(averageOfLength) + " and the number is " +
                           oCodeThatInArray[number] + "\n";
             return decoded1527;
             break;
@@ -111,7 +114,7 @@ std::string Algo1527_2242::decode1527FromUrh(std::string stringOf1527WaveformFro
         } else if (oDataCodeThatInArray[i] == N) {
             oDataCodeThatInArray[i] = "0";
         } else {
-            decoded1527 = "Error: the average is " + std::to_string(average) + " and the number is " +
+            decoded1527 = "Error: the average is " + std::to_string(averageOfLength) + " and the number is " +
                           oCodeThatInArray[number] + "\n";
             return decoded1527;
             break;

@@ -6,6 +6,7 @@
 #define OOKFORMATCALCULATE_ALGO2262_H
 
 #include <string>
+#include <iostream>
 
 #include "processUnit.h"
 

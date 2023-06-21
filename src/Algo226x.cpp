@@ -2,6 +2,8 @@
 // Created by zxkmm.
 //
 
+#define BIT_NUM_2262 24
+
 #include "Algo226x.h"
 
 std::string Algo226x::decode2262FromUrh(std::string stringOf2262WaveformFromUrh) {
@@ -24,36 +26,46 @@ std::string Algo226x::decode2262FromUrh(std::string stringOf2262WaveformFromUrh)
 
     stringOf2262WaveformFromUrh = stringUnit.replaceMeaningless0WithSpace(stringOf2262WaveformFromUrh);
 
-    std::string oCodeThatInArray[25];
+    std::string oCodeThatInArray[BIT_NUM_2262 + 1];
     int i = 0;
     std::stringstream ssin(stringOf2262WaveformFromUrh);
-    while (ssin.good() && i < 25) {
+    while (ssin.good() && i < BIT_NUM_2262 + 1) {
         ssin >> oCodeThatInArray[i];
         ++i;
     }
 
 
-    //Calculate the average	of the array
-    int sum = 0;
+//    //Calculate the average	of the array
+//    int sum = 0;
+//    for (const auto &i: oCodeThatInArray) {
+//        sum += stoi(i);
+//    }
+//    int average = sum / (BIT_NUM_2262 + 1);
+
+    //avg
+    int sumOfLength = 0;
     for (const auto &i: oCodeThatInArray) {
-        sum += stoi(i);
+        sumOfLength += stringUnit.getLengthOfVariable(i);
     }
-    int average = sum / 25;
+    int averageOfLength = sumOfLength / (BIT_NUM_2262 + 1);
 
 
     int number = 0;
     std::string NWModeOfCode = "";
     const std::string N = "N";
     const std::string W = "W";
-    for (; number < 24; number++) {//25 is total 2262 wave numbers,24 is for remove the sync code
+    for (; number < BIT_NUM_2262; number++) {//25 is total 2262 wave numbers,24 is for remove the sync code
         //Convert oCodeThatInArray[number] into int
         int oCodeThatInArrayInt = stoi(oCodeThatInArray[number]);
-        if (oCodeThatInArrayInt <= average) {
+//        std::cout << "oCodeThatInArrayInt: " << oCodeThatInArrayInt << std::endl;//DBG
+        if (std::to_string(oCodeThatInArrayInt).length() <= averageOfLength) {
+//            std::cout << std::to_string(oCodeThatInArrayInt).length() << std::endl;//DBG
             NWModeOfCode = NWModeOfCode + N;
-        } else if (oCodeThatInArrayInt > average) {
+        } else if (std::to_string(oCodeThatInArrayInt). length() > averageOfLength) {
+//            std::cout << std::to_string(oCodeThatInArrayInt).length() << std::endl;//DBG
             NWModeOfCode = NWModeOfCode + W;
         } else {
-            std::string error = "Error: the average is " + std::to_string(average) + " and the number is " +
+            std::string error = "Error: the average is " + std::to_string(averageOfLength) + " and the number is " +
                                 std::string(oCodeThatInArray[number]);
 
             return error;
