@@ -56,59 +56,59 @@ int Interface::mainMenu() {
     std::cin >> choice;
     switch (choice) {
         case 1: {//demodulated 2262/2260 from URH to static 2262/2260 code
-            Algo226x decodeCase1;
+            Algo226x decodeUrh2262;
             std::string userInputed2262CodeFromUrh;
             std::cout << "Input 2262/2260 demodulated code from URH:\n>";
             std::cin >> userInputed2262CodeFromUrh;
             Interface::outputAClearResult("static 2262 code is:",
-                                          decodeCase1.decode2262FromUrh(userInputed2262CodeFromUrh), "AAAAAAAADDDD");
+                                          decodeUrh2262.decode2262FromUrh(userInputed2262CodeFromUrh), "AAAAAAAADDDD");
             //press any key to continue
 
 
             return 1;
         }
         case 2: {//demodulated 1527/2242 from URH to static 1527/2242 code
-            Algo1527_2242 decodeCase2;
+            Algo1527_2242 decodeUrh1527;
             std::string userInputed1527CodeFromUrh;
             std::cout << "Input 1527/2242 demodulated code from URH:\n>";
             std::cin >> userInputed1527CodeFromUrh;
             Interface::outputAClearResult("static 1527 code is:",
-                                          decodeCase2.decode1527FromUrh(userInputed1527CodeFromUrh), "AAAAAAAAAADDDD");
+                                          decodeUrh1527.decode1527FromUrh(userInputed1527CodeFromUrh), "AAAAAAAAAADDDD");
 
             //press any key to continue
 
             return 1;
         }
         case 3: {//4Bits 1527 code to 2Bits
-            Algo1527_2242 decodeCase3;
+            Algo1527_2242 calculate1527_2_4;
             std::string userInputed1527CodeFromUrh;
             std::cout << "Input 4Bits 1527 code:\n>";
             std::cin >> userInputed1527CodeFromUrh;
             Interface::outputAClearResult("2Bits 1527 code is:",
-                                          decodeCase3.trans4Bit1527To2Bit(userInputed1527CodeFromUrh),
+                                          calculate1527_2_4.trans4Bit1527To2Bit(userInputed1527CodeFromUrh),
                                           "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADDDD");
             return 1;
 
         }
         case 4: {//2Bits 1527 code to 4Bits
-            Algo1527_2242 decodeCase4;
+            Algo1527_2242 calculate1527_4_2;
             std::string userInputed1527CodeFromUrh;
             std::cout << "Input 2Bits 1527 code:\n>";
             std::cin >> userInputed1527CodeFromUrh;
             Interface::outputAClearResult("4Bits 1527 code is:",
-                                          decodeCase4.trans2Bit1527To4Bit(userInputed1527CodeFromUrh),
+                                          calculate1527_4_2.trans2Bit1527To4Bit(userInputed1527CodeFromUrh),
                                           "AAAAAAAAAADDDD");
             return 1;
 
 
         }
         case 5: {//general decode e.g. Tesla/K5 Morining/Car keys
-            AlgoGeneral decodeCase5;
+            AlgoGeneral decodeGeneral;
             std::string userInputed1527CodeFromUrh;
             std::cout << "Input 2Bits 1527 code:\n>";
             std::cin >> userInputed1527CodeFromUrh;
             Interface::outputAClearResult("4Bits 1527 code is:",
-                                          decodeCase5.decodeGeneralFromUrh(userInputed1527CodeFromUrh),
+                                          decodeGeneral.decodeGeneralFromUrh(userInputed1527CodeFromUrh),
                                           "");
             return 1;
 
