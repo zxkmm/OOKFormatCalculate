@@ -105,9 +105,9 @@ int Interface::mainMenu() {
         case 5: {//general decode e.g. Tesla/K5 Morining/Car keys
             AlgoGeneral decodeGeneral;
             std::string userInputed1527CodeFromUrh;
-            std::cout << "Input 2Bits 1527 code:\n>";
+            std::cout << "Input 2Bits general code from URH:\n>";
             std::cin >> userInputed1527CodeFromUrh;
-            Interface::outputAClearResult("4Bits 1527 code is:",
+            Interface::outputAClearResult("NW Mode of the code is:",
                                           decodeGeneral.decodeGeneralFromUrh(userInputed1527CodeFromUrh),
                                           "");
             return 1;
