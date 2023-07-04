@@ -44,11 +44,11 @@ void Interface::outputAClearResult(std::string explainContent, std::string resul
 
 int Interface::mainMenu() {
 
-    std::cout << "\n----\nPress 1 for demodulated 2262/2260 from URH to static 2262/2260 code\n"
-              << "----\nPress 2 for demodulated 1527/2242 from URH to static 1527/2242 code\n"
+    std::cout << "\n----\nPress 1 for demodulated 2262/2260 from URH to static 2262/2260 code, 11 for diff two pieces\n"
+              << "----\nPress 2 for demodulated 1527/2242 from URH to static 1527/2242 code, 21 for diff two pieces\n"
               << "----\nPress 3 for for 4Bits 1527 code to 2Bits\n"
               << "----\nPress 4 for 2Bits 1527 code to 4Bits\n"
-              << "----\nPress 5 for general decode e.g. Tesla/K5 Morining/Car keys\n"
+              << "----\nPress 5 for general decode e.g. Tesla/K5 Morining/Car keys, 51 for diff two pieces\n"
               << "----\nPress 99 to exit.\n"
               << "\nChoice:";
 
@@ -113,6 +113,108 @@ int Interface::mainMenu() {
             return 1;
 
 
+        }
+
+        case 11:{
+
+            Algo226x decodeAndDiffUrh2262;
+
+            std::string userInputed2262CodeFromUrh;
+
+            std::cout << "Input 1st 226x demodulated code from URH:\n>";
+            std::cin >> userInputed2262CodeFromUrh;
+            std::string firstDecodeResult = decodeAndDiffUrh2262.decode2262FromUrh(userInputed2262CodeFromUrh);
+            Interface::outputAClearResult("first static general code is:",
+                                          firstDecodeResult, "AAAAAAAADDDD");
+
+            std::cout << "Input 2nd 226x demodulated code from URH:\n>";
+            std::cin >> userInputed2262CodeFromUrh;
+            std::string secondDecodeResult = decodeAndDiffUrh2262.decode2262FromUrh(userInputed2262CodeFromUrh);
+            Interface::outputAClearResult("second static general code is:",
+                                          secondDecodeResult, "AAAAAAAADDDD");
+
+            StringUnit stringUnit;
+            std::string diff = stringUnit.compareTwoStrings(firstDecodeResult, secondDecodeResult);
+            std::cout << "diff:" << std::endl;
+            std::cout << firstDecodeResult << std::endl;
+            std::cout << diff << std::endl;
+            std::cout << secondDecodeResult << std::endl;
+
+            if(diff.find_first_not_of("-") == std::string::npos){
+                std::cout << "(all same)" << std::endl;
+            }
+
+            return 1;
+
+        }
+
+        case 21:{
+
+            Algo1527_2242 decodeAndDiffUrh1527;
+
+            std::string userInputed1527CodeFromUrh;
+
+            std::cout << "Input 1st 1527/2242 demodulated code from URH:\n>";
+            std::cin >> userInputed1527CodeFromUrh;
+            std::string firstDecodeResult = decodeAndDiffUrh1527.decode1527FromUrh(userInputed1527CodeFromUrh);
+            Interface::outputAClearResult("first 1527 code is:",
+                                          firstDecodeResult, "AAAAAAAADDDD");
+
+            std::cout << "Input 2nd 226x demodulated code from URH:\n>";
+            std::cin >> userInputed1527CodeFromUrh;
+            std::string secondDecodeResult = decodeAndDiffUrh1527.decode1527FromUrh(userInputed1527CodeFromUrh);
+            Interface::outputAClearResult("second 1527 code is:",
+                                          secondDecodeResult, "AAAAAAAADDDD");
+
+            StringUnit stringUnit;
+            std::string diff = stringUnit.compareTwoStrings(firstDecodeResult, secondDecodeResult);
+            std::cout << "diff:" << std::endl;
+            std::cout << firstDecodeResult << std::endl;
+            std::cout << diff << std::endl;
+            std::cout << secondDecodeResult << std::endl;
+
+            if(diff.find_first_not_of("-") == std::string::npos){
+                std::cout << "(all same)" << std::endl;
+            }
+
+            return 1;
+
+        }
+
+        case 51:{//demodulated general code from URH to static 2262/2260 code two times and do diff
+
+            AlgoGeneral decodeGeneral;
+
+            std::string userInputedGeneralCodeFromUrh;
+
+            std::cout << "Input 1st general demodulated code from URH:\n>";
+            std::cin >> userInputedGeneralCodeFromUrh;
+            std::string firstDecodeResult = decodeGeneral.decodeGeneralFromUrh(userInputedGeneralCodeFromUrh);
+            Interface::outputAClearResult("first static general code is:",
+                                          firstDecodeResult, "");
+
+            std::cout << "Input 2nd general demodulated code from URH:\n>";
+            std::cin >> userInputedGeneralCodeFromUrh;
+            std::string secondDecodeResult = decodeGeneral.decodeGeneralFromUrh(userInputedGeneralCodeFromUrh);
+            Interface::outputAClearResult("second static general code is:",
+                                          secondDecodeResult, "");
+
+            if(firstDecodeResult.length() != secondDecodeResult.length()){
+                std::cout << "Warning: length is different, it's definitely not same and maybe there's bad decode processing" << std::endl;
+            }
+
+            StringUnit stringUnit;
+            std::string diff = stringUnit.compareTwoStrings(firstDecodeResult, secondDecodeResult);
+            std::cout << "diff:" << std::endl;
+            std::cout << firstDecodeResult << std::endl;
+            std::cout << diff << std::endl;
+            std::cout << secondDecodeResult << std::endl;
+
+            if(diff.find_first_not_of("-") == std::string::npos){
+                std::cout << "(all same)" << std::endl;
+            }
+
+            return 1;
         }
 
         case 99:

@@ -124,3 +124,28 @@ std::string StringUnit::removeNonDesiredCharacters(const std::string &str, const
     }
     return result;
 }
+
+//compare two strings, and show the difference just same as Samy's diffbits
+std::string StringUnit::compareTwoStrings(std::string string1, std::string string2) {
+    std::string result;
+    int length = std::min(string1.length(), string2.length());
+
+    for (int i = 0; i < length; i++) {
+        if (string1[i] == string2[i]) {
+            result += "-";
+        } else {
+            result += "^";
+        }
+    }
+
+    // considering the off part as different
+    if (string1.length() > length) {
+        result += std::string(string1.length() - length, '+');
+    } else if (string2.length() > length) {
+        result += std::string(string2.length() - length, '+');
+    }
+
+    return result;
+}
+
+
