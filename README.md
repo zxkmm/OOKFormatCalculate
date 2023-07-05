@@ -2,6 +2,12 @@
 Other encoders is OTW.  
 JS+HTML web app is OTW.
 
+# Screenshots and videos
+
+![screenshot1.png](tools%2Fresources%2Fscreenshot1.png)
+![screenshot2.png](tools%2Fresources%2Fscreenshot2.png)
+![screenshot3.png](tools%2Fresources%2Fscreenshot3.png)
+
 https://user-images.githubusercontent.com/24917424/192080873-70d0535c-4e15-4c5a-8465-7bbb75ffa4ea.MP4
 
 # Compile

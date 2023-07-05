@@ -8,11 +8,15 @@
 其他编码器正在编写.
 JS+HTML 网页 app 正在编写.
 
+# 截图和视频
+
+![screenshot1.png](tools%2Fresources%2Fscreenshot1.png)
+![screenshot2.png](tools%2Fresources%2Fscreenshot2.png)
+![screenshot3.png](tools%2Fresources%2Fscreenshot3.png)
+
 https://user-images.githubusercontent.com/24917424/192080873-70d0535c-4e15-4c5a-8465-7bbb75ffa4ea.MP4  
 
 # 编译
-```angular2html
-# Compile
 ```angular2html
 git clone https://github.com/zxkmm/OOKFormatCalculate.git
 cd OOKFormatCalculate
