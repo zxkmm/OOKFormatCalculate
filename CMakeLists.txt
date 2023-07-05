@@ -13,4 +13,8 @@ add_executable(OOKFormatCalculate
         src/Interface.cpp
         src/Interface.h
         src/processUnit.cpp
-        src/processUnit.h src/AlgoGeneral.h src/AlgoGeneral.cpp src/main.h src/main.cpp)
+        src/processUnit.h
+        src/AlgoGeneral.h
+        src/AlgoGeneral.cpp
+        src/main.h
+        src/main.cpp)
