@@ -30,16 +30,18 @@ AKA 4Bits data <---> 2Bits data
 e.g.  
 ``H0FF1FHFHH0100``<--->``100001011101100110100100``  
 
-### Decode data from URH to common code
+### Decode data from URH to common code or do diff  
 AKA Data demodulated by URH ----> 4Bits data of 1527   
 e.g.  
 ``111010001000100010001110100011101110111010001110111010001000111011101000111010000111010001000100010`` ---> `H0FF1FHFHH 1000`
 ## 2262/2260
-Data demodulated by URH  ---->  3Bits data AKA common 2262 code
+Data demodulated by URH  ---->  3Bits data AKA common 2262 code  
+or do diff  
 e.g.   
 ``100010001110111010001001001110100010001000100100010001000100011101110100010001000100010001000100``---->``010F000010000``  
 ## general
-Data demodulated by URH ----> 2Bits general data 
+Data demodulated by URH ----> 2Bits general data  
+or do diff  
 e.g. ``101010101010101010101010100010101100101100110010110011001100110011001011010011010010110101001010110100110100110010101011010010110001010110010110011001011001100110011001100101101001101001011010100101011010011010011001010101101001011000101011001011001100101100110011001100110010110100110100101101010010101101001101001100101010110100101 ``  
 --->  
 ``NNNNNNNNNNNNNNNWNWWNWWWWWNWNWNNWNNNNWNWNWNNNWNNWNNWNWWNWWWWWNWNWNNWNNNNWNWNWNNNWNNWNNWNWWNWWWWWNWNWNNWNNNNWNWNWNNNWNN``
@@ -59,11 +61,12 @@ This repo is just a tool to decode data from URH or calculate data/code/waveform
 [rtl-433](https://github.com/merbanan/rtl_433)  
 [ooktools](https://github.com/leonjza/ooktools)   
 [RFQuack](https://github.com/rfquack/RFQuack)  
-If you are trying to brute force an OOK device, please try these project below:  
+If you are trying to brute-force an OOK device, please try these project below:  
 [OpenSesame](https://github.com/samyk/opensesame)  
 [PortapackMayhem](https://github.com/eried/portapack-mayhem)  
 [2262Scan](https://github.com/zxkmm/2262Scan)
-
+[flipper-unleashed](https://github.com/DarkFlippers/unleashed-firmware)  
+[flipper-xtreme](https://github.com/Flipper-XFW/Xtreme-Firmware)
 # requirements
 C++11 or Python 3 or both
 # i18n
