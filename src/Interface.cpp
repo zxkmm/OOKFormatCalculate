@@ -124,13 +124,13 @@ int Interface::mainMenu() {
             std::cout << "Input 1st 226x demodulated code from URH:\n>";
             std::cin >> userInputed2262CodeFromUrh;
             std::string firstDecodeResult = decodeAndDiffUrh2262.decode2262FromUrh(userInputed2262CodeFromUrh);
-            Interface::outputAClearResult("first static general code is:",
+            Interface::outputAClearResult("first static 226x code is:",
                                           firstDecodeResult, "AAAAAAAADDDD");
 
             std::cout << "Input 2nd 226x demodulated code from URH:\n>";
             std::cin >> userInputed2262CodeFromUrh;
             std::string secondDecodeResult = decodeAndDiffUrh2262.decode2262FromUrh(userInputed2262CodeFromUrh);
-            Interface::outputAClearResult("second static general code is:",
+            Interface::outputAClearResult("second static 226x code is:",
                                           secondDecodeResult, "AAAAAAAADDDD");
 
             StringUnit stringUnit;
@@ -157,13 +157,13 @@ int Interface::mainMenu() {
             std::cout << "Input 1st 1527/2242 demodulated code from URH:\n>";
             std::cin >> userInputed1527CodeFromUrh;
             std::string firstDecodeResult = decodeAndDiffUrh1527.decode1527FromUrh(userInputed1527CodeFromUrh);
-            Interface::outputAClearResult("first 1527 code is:",
+            Interface::outputAClearResult("first 1527/2242 code is:",
                                           firstDecodeResult, "AAAAAAAADDDD");
 
-            std::cout << "Input 2nd 226x demodulated code from URH:\n>";
+            std::cout << "Input 2nd 1527/2242 demodulated code from URH:\n>";
             std::cin >> userInputed1527CodeFromUrh;
             std::string secondDecodeResult = decodeAndDiffUrh1527.decode1527FromUrh(userInputed1527CodeFromUrh);
-            Interface::outputAClearResult("second 1527 code is:",
+            Interface::outputAClearResult("second 1527/2242 code is:",
                                           secondDecodeResult, "AAAAAAAADDDD");
 
             StringUnit stringUnit;
