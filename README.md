@@ -74,8 +74,8 @@ This repo is just a tool to decode data from URH or calculate data/code/waveform
 If you are trying to brute-force an OOK device, please try these project below:  
 [OpenSesame](https://github.com/samyk/opensesame)  
 [PortapackMayhem](https://github.com/eried/portapack-mayhem)  
-[2262Scan](https://github.com/zxkmm/2262Scan)
-[flipper-unleashed](https://github.com/DarkFlippers/unleashed-firmware)  
+[2262Scan](https://github.com/zxkmm/2262Scan)   
+[flipper-unleashed](https://github.com/DarkFlippers/unleashed-firmware)    
 [flipper-xtreme](https://github.com/Flipper-XFW/Xtreme-Firmware)
 # requirements
 C++11 or Python 3 or both
