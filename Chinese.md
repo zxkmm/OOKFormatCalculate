@@ -4,16 +4,21 @@
 ## 禁止墨家某哥之类流氓公司使用，否则si🐎！
 ## 转载必须开源，否则si🐎！
 # OOK调制解码/转换器
-适用于ASK/OOK调制  
-其他编码器正在编写.
-JS+HTML 网页 app 正在编写.
+能够自动纠偏的2262/2242/1527/2260 半解码器
 
 # 截图和视频
 
+
+## 自动纠偏
 ![screenshot1.png](tools%2Fresources%2Fscreenshot1.png)
+  
+## 优雅地diff2262/2242/1527/2260
 ![screenshot2.png](tools%2Fresources%2Fscreenshot2.png)
+
+## 优雅地解码2262/2242/1527/2260
 ![screenshot3.png](tools%2Fresources%2Fscreenshot3.png)
 
+## 与URH共用，并在现实生活中起作用
 https://user-images.githubusercontent.com/24917424/192080873-70d0535c-4e15-4c5a-8465-7bbb75ffa4ea.MP4  
 
 # 编译
