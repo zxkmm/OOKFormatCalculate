@@ -4,11 +4,12 @@
 
 #include "Interface.h"
 #include "AlgoGeneral.h"
+#include <unordered_set>
 
 void Interface::outputAClearResult(std::string explainContent, std::string result, std::string ADFormat) {
     //detect how long the result is, then put the result into an int variable
     unsigned long resultLength = result.length();
-//    std::cout << resultLength << std::endl; //DBG
+    //    std::cout << resultLength << std::endl; //DBG
     //detect how long the explainContent is, then put the explainContent into an int variable
     unsigned long explainContentLength = explainContent.length();
     //output spaces which is as long as explainContentLength
@@ -45,12 +46,13 @@ void Interface::outputAClearResult(std::string explainContent, std::string resul
 int Interface::mainMenu() {
 
     std::cout << "\n----\nPress 1 for demodulated 2262/2260 from URH to static 2262/2260 code, 11 for diff two pieces\n"
-              << "----\nPress 2 for demodulated 1527/2242 from URH to static 1527/2242 code, 21 for diff two pieces\n"
-              << "----\nPress 3 for for 4Bits 1527 code to 2Bits\n"
-              << "----\nPress 4 for 2Bits 1527 code to 4Bits\n"
-              << "----\nPress 5 for general decode e.g. Tesla/K5 Morining/Car keys, 51 for diff two pieces\n"
-              << "----\nPress 99 to exit.\n"
-              << "\nChoice:";
+    << "----\nPress 2 for demodulated 1527/2242 from URH to static 1527/2242 code, 21 for diff two pieces\n"
+    << "----\nPress 3 for for 4Bits 1527 code to 2Bits\n"
+    << "----\nPress 4 for 2Bits 1527 code to 4Bits\n"
+    << "----\nPress 5 for general decode e.g. Tesla/K5 Morining/Car keys, 51 for diff two pieces\n"
+    << "----\nPress 6 for auto decoding, 61 for auto diff (beta)\n"
+    << "----\nPress 99 to exit.\n"
+    << "\nChoice:";
 
     int choice;
     std::cin >> choice;
@@ -124,7 +126,7 @@ int Interface::mainMenu() {
             std::cout << "Input 1st 226x demodulated code from URH:\n>";
             std::cin >> userInputed2262CodeFromUrh;
             std::string firstDecodeResult = decodeAndDiffUrh2262.decode2262FromUrh(userInputed2262CodeFromUrh);
-            Interface::outputAClearResult("first static 226x code is:",
+            Interface::outputAClearResult("first static 226x code is: ",
                                           firstDecodeResult, "AAAAAAAADDDD");
 
             std::cout << "Input 2nd 226x demodulated code from URH:\n>";
@@ -157,7 +159,7 @@ int Interface::mainMenu() {
             std::cout << "Input 1st 1527/2242 demodulated code from URH:\n>";
             std::cin >> userInputed1527CodeFromUrh;
             std::string firstDecodeResult = decodeAndDiffUrh1527.decode1527FromUrh(userInputed1527CodeFromUrh);
-            Interface::outputAClearResult("first 1527/2242 code is:",
+            Interface::outputAClearResult("first 1527/2242 code is: ",
                                           firstDecodeResult, "AAAAAAAADDDD");
 
             std::cout << "Input 2nd 1527/2242 demodulated code from URH:\n>";
@@ -190,7 +192,7 @@ int Interface::mainMenu() {
             std::cout << "Input 1st general demodulated code from URH:\n>";
             std::cin >> userInputedGeneralCodeFromUrh;
             std::string firstDecodeResult = decodeGeneral.decodeGeneralFromUrh(userInputedGeneralCodeFromUrh);
-            Interface::outputAClearResult("first static general code is:",
+            Interface::outputAClearResult("first static general code is: ",
                                           firstDecodeResult, "");
 
             std::cout << "Input 2nd general demodulated code from URH:\n>";
@@ -212,6 +214,86 @@ int Interface::mainMenu() {
 
             if(diff.find_first_not_of("-") == std::string::npos){
                 std::cout << "(all same)" << std::endl;
+            }
+
+            return 1;
+        }
+
+        case 6:{//auto decoding
+            Algo1527_2242 decodeUnkownTry1527;
+            Algo226x decodeUnknownTry2262;
+            AlgoGeneral decodeUnknownTryFinal;
+
+            std::string userInputedUnknownCodeFromUrh;
+            std::string test1527Result;
+            std::string test2262Result;
+            std::string testFinalResult;
+            std::string typeResult = "notset";
+            std::unordered_set<char> valid2262Chars = {'0', 'F', '1'};
+            std::unordered_set<char> valid1527Chars = {'0', 'F', '1', 'H'};
+            std::unordered_set<char> validGeneralChars = {'.', '_'};
+            std::cout << "Input Unknown demodulated code from URH:\n>";
+            std::cin >> userInputedUnknownCodeFromUrh;
+            test1527Result = decodeUnkownTry1527.decode1527FromUrh(userInputedUnknownCodeFromUrh);
+            test2262Result = decodeUnknownTry2262.decode2262FromUrh(userInputedUnknownCodeFromUrh);
+            testFinalResult = decodeUnknownTryFinal.decodeGeneralFromUrh(userInputedUnknownCodeFromUrh);
+
+            std::cout << "\n------\n";
+            std::cout << test1527Result;
+
+            std::cout << "\n------\n";
+            std::cout << test2262Result;
+
+            std::cout << "\n------\n";
+            std::cout << testFinalResult;
+
+            std::cout << "\n------\n";
+
+
+
+            for (char _set2262 : test2262Result){
+                if (valid2262Chars.find(_set2262) == valid2262Chars.end()){//isn't in 2262 range
+                    //try1527
+                    std::cout << "\nisn't in 2262 range try1527\n";
+                    for (char _set1527 : test1527Result){
+                        if (valid1527Chars.find(_set1527) == valid2262Chars.end()){//isn't in 1527 range
+                            //try general
+                            std::cout << "\nisn't in 1527 range trygener\n";
+                            for (char _setGenral : testFinalResult){
+                                if (validGeneralChars.find(_setGenral) ==validGeneralChars.end()){//isn't in general range'
+                                    typeResult = "unknown";
+                                    break;
+                                }else{//in gerenal range
+                                    typeResult = "general";
+                                    break;
+                                }
+                            }
+
+                            //try general end
+                        } else if (test1527Result.length() == 14){//is in 1527 range && is 1527 length
+                            typeResult = "1527";
+                            break;
+                        }
+                    }
+
+                    //try1527end
+                } else if (test2262Result.length() == 14){//is in 2262 range && is 2262 length
+                    typeResult = "2262";
+                    break;
+                }
+            }
+
+
+            std::cout << "\n------\n";
+            std::cout << typeResult;
+            std::cout << "\n------\n";
+
+            if (typeResult == "1527"){
+                Interface::outputAClearResult("static 1527 code is:",test1527Result, "AAAAAAAAAADDDD");
+            }else if (typeResult == "2262"){
+                Interface::outputAClearResult("static 2262 code is:",test2262Result, "AAAAAAAAAADDDD");
+            }else{
+                Interface::outputAClearResult("NW Mode of the code is:",testFinalResult,"");
             }
 
             return 1;
