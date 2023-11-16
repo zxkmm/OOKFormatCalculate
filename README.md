@@ -3,11 +3,21 @@ Princeton - 2262/1527/2260/2242 Bit-formating calculator / partial decoder, that
 
 # Screenshots and videos
 
+## auto correction
 ![screenshot1.png](tools%2Fresources%2Fscreenshot1.png)
 ^ in this screenshot you can see that same signal which been captured different times causing URH outputting different binary, which could been corrected back to correct one with this tool.  
-![screenshot2.png](tools%2Fresources%2Fscreenshot2.png)
-![screenshot3.png](tools%2Fresources%2Fscreenshot3.png)
 
+
+## elegant diffing 2262/1527/2260/2242
+![screenshot2.png](tools%2Fresources%2Fscreenshot2.png)
+^ you can use the most elegant way to diff 2262/1527/2260/2242.    
+
+
+## elegant decoding 2262/1527/2260/2242
+![screenshot3.png](tools%2Fresources%2Fscreenshot3.png)
+^ the most stable way to decide binary into 2262/1527/2260/2242  
+  
+## work with URH and take efforts irl
 https://user-images.githubusercontent.com/24917424/192080873-70d0535c-4e15-4c5a-8465-7bbb75ffa4ea.MP4
 
 # Compile
