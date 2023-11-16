@@ -1,6 +1,5 @@
 # OOKFormatCalculate
-Other encoders is OTW.  
-JS+HTML web app is OTW.
+Princeton - 2262/1527/2260/2242 Bit-formating calculator / partial decoder, that use special algo to prevent weak signal or noise causing URH decoding OOK codes in wrong way  
 
 # Screenshots and videos
 
