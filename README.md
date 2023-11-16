@@ -4,6 +4,7 @@ Princeton - 2262/1527/2260/2242 Bit-formating calculator / partial decoder, that
 # Screenshots and videos
 
 ![screenshot1.png](tools%2Fresources%2Fscreenshot1.png)
+^ in this screenshot you can see that same signal which been captured different times causing URH outputting different binary, which could been corrected back to correct one with this tool.  
 ![screenshot2.png](tools%2Fresources%2Fscreenshot2.png)
 ![screenshot3.png](tools%2Fresources%2Fscreenshot3.png)
 
