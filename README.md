@@ -88,7 +88,7 @@ C++11 or Python 3 or both
 
 # Additional Attachment to GPT License
 
-You are free to use the code in this repository, regardless of whether it's closed source or not, or whether it's part of paid software or not. However, I have incorporated these additional requests into the license of this repository. If you use the code, design, text, algorithms, or anything else from this repository, you must include my username "zxkmm" and the link to this repository in three places:
+You are free to use the code in this repository, whether it's part of paid software or not. However, I have incorporated these additional requests into the license of this repository. If you use the code, design, text, algorithms, or anything else from this repository, you must include my username "zxkmm" and the link to this repository in three places:
 
 1. In the code comments.
 2. In the settings interface related to my code.
