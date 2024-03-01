@@ -45,14 +45,9 @@ void Interface::outputAClearResult(std::string explainContent, std::string resul
 
 int Interface::mainMenu() {
 
-    std::cout << "\n----\nPress 1 for demodulated 2262/2260 from URH to static 2262/2260 code, 11 for diff two pieces\n"
-    << "----\nPress 2 for demodulated 1527/2242 from URH to static 1527/2242 code, 21 for diff two pieces\n"
-    << "----\nPress 3 for for 4Bits 1527 code to 2Bits\n"
-    << "----\nPress 4 for 2Bits 1527 code to 4Bits\n"
-    << "----\nPress 5 for general decode e.g. Tesla/K5 Morining/Car keys, 51 for diff two pieces\n"
-    << "----\nPress 6 for auto decoding, 61 for auto diff (beta)\n"
-    << "----\nPress 99 to exit.\n"
-    << "\nChoice:";
+    std::cout << ascii_art << '\n';
+
+    std::cout << menu << std::endl;
 
     int choice;
     std::cin >> choice;
@@ -62,11 +57,10 @@ int Interface::mainMenu() {
             std::string userInputed2262CodeFromUrh;
             std::cout << "Input 2262/2260 demodulated code from URH:\n>";
             std::cin >> userInputed2262CodeFromUrh;
-            Interface::outputAClearResult("static 2262 code is:",
-                                          decodeUrh2262.decode2262FromUrh(userInputed2262CodeFromUrh), "AAAAAAAADDDD");
-            //press any key to continue
-
-
+            Interface::outputAClearResult(
+                    "static 2262 code is:",
+                    decodeUrh2262.decode2262FromUrh(userInputed2262CodeFromUrh),
+                    "AAAAAAAADDDD");
             return 1;
         }
         case 2: {//demodulated 1527/2242 from URH to static 1527/2242 code
@@ -74,8 +68,10 @@ int Interface::mainMenu() {
             std::string userInputed1527CodeFromUrh;
             std::cout << "Input 1527/2242 demodulated code from URH:\n>";
             std::cin >> userInputed1527CodeFromUrh;
-            Interface::outputAClearResult("static 1527 code is:",
-                                          decodeUrh1527.decode1527FromUrh(userInputed1527CodeFromUrh), "AAAAAAAAAADDDD");
+            Interface::outputAClearResult(
+                    "static 1527 code is:",
+                    decodeUrh1527.decode1527FromUrh(userInputed1527CodeFromUrh),
+                    "AAAAAAAAAADDDD");
 
             //press any key to continue
 
@@ -86,9 +82,10 @@ int Interface::mainMenu() {
             std::string userInputed1527CodeFromUrh;
             std::cout << "Input 4Bits 1527 code:\n>";
             std::cin >> userInputed1527CodeFromUrh;
-            Interface::outputAClearResult("2Bits 1527 code is:",
-                                          calculate1527_2_4.trans4Bit1527To2Bit(userInputed1527CodeFromUrh),
-                                          "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADDDD");
+            Interface::outputAClearResult(
+                    "2Bits 1527 code is:",
+                    calculate1527_2_4.trans4Bit1527To2Bit(userInputed1527CodeFromUrh),
+                    "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADDDD");
             return 1;
 
         }
@@ -97,9 +94,10 @@ int Interface::mainMenu() {
             std::string userInputed1527CodeFromUrh;
             std::cout << "Input 2Bits 1527 code:\n>";
             std::cin >> userInputed1527CodeFromUrh;
-            Interface::outputAClearResult("4Bits 1527 code is:",
-                                          calculate1527_4_2.trans2Bit1527To4Bit(userInputed1527CodeFromUrh),
-                                          "AAAAAAAAAADDDD");
+            Interface::outputAClearResult(
+                    "4Bits 1527 code is:",
+                    calculate1527_4_2.trans2Bit1527To4Bit(userInputed1527CodeFromUrh),
+                    "AAAAAAAAAADDDD");
             return 1;
 
 
@@ -109,15 +107,16 @@ int Interface::mainMenu() {
             std::string userInputed1527CodeFromUrh;
             std::cout << "Input 2Bits general code from URH:\n>";
             std::cin >> userInputed1527CodeFromUrh;
-            Interface::outputAClearResult("NW Mode of the code is:",
-                                          decodeGeneral.decodeGeneralFromUrh(userInputed1527CodeFromUrh),
-                                          "");
+            Interface::outputAClearResult(
+                    "NW Mode of the code is:",
+                    decodeGeneral.decodeGeneralFromUrh(userInputed1527CodeFromUrh),
+                    "");
             return 1;
 
 
         }
 
-        case 11:{
+        case 11: {
 
             Algo226x decodeAndDiffUrh2262;
 
@@ -126,14 +125,18 @@ int Interface::mainMenu() {
             std::cout << "Input 1st 226x demodulated code from URH:\n>";
             std::cin >> userInputed2262CodeFromUrh;
             std::string firstDecodeResult = decodeAndDiffUrh2262.decode2262FromUrh(userInputed2262CodeFromUrh);
-            Interface::outputAClearResult("first static 226x code is: ",
-                                          firstDecodeResult, "AAAAAAAADDDD");
+            Interface::outputAClearResult(
+                    "first static 226x code is: ",
+                    firstDecodeResult,
+                    "AAAAAAAADDDD");
 
             std::cout << "Input 2nd 226x demodulated code from URH:\n>";
             std::cin >> userInputed2262CodeFromUrh;
             std::string secondDecodeResult = decodeAndDiffUrh2262.decode2262FromUrh(userInputed2262CodeFromUrh);
-            Interface::outputAClearResult("second static 226x code is:",
-                                          secondDecodeResult, "AAAAAAAADDDD");
+            Interface::outputAClearResult(
+                    "second static 226x code is:",
+                    secondDecodeResult,
+                    "AAAAAAAADDDD");
 
             StringUnit stringUnit;
             std::string diff = stringUnit.compareTwoStrings(firstDecodeResult, secondDecodeResult);
@@ -142,7 +145,7 @@ int Interface::mainMenu() {
             std::cout << diff << std::endl;
             std::cout << secondDecodeResult << std::endl;
 
-            if(diff.find_first_not_of("-") == std::string::npos){
+            if (diff.find_first_not_of("-") == std::string::npos) {
                 std::cout << "(all same)" << std::endl;
             }
 
@@ -150,7 +153,7 @@ int Interface::mainMenu() {
 
         }
 
-        case 21:{
+        case 21: {
 
             Algo1527_2242 decodeAndDiffUrh1527;
 
@@ -159,14 +162,18 @@ int Interface::mainMenu() {
             std::cout << "Input 1st 1527/2242 demodulated code from URH:\n>";
             std::cin >> userInputed1527CodeFromUrh;
             std::string firstDecodeResult = decodeAndDiffUrh1527.decode1527FromUrh(userInputed1527CodeFromUrh);
-            Interface::outputAClearResult("first 1527/2242 code is: ",
-                                          firstDecodeResult, "AAAAAAAADDDD");
+            Interface::outputAClearResult(
+                    "first 1527/2242 code is: ",
+                    firstDecodeResult,
+                    "AAAAAAAADDDD");
 
             std::cout << "Input 2nd 1527/2242 demodulated code from URH:\n>";
             std::cin >> userInputed1527CodeFromUrh;
             std::string secondDecodeResult = decodeAndDiffUrh1527.decode1527FromUrh(userInputed1527CodeFromUrh);
-            Interface::outputAClearResult("second 1527/2242 code is:",
-                                          secondDecodeResult, "AAAAAAAADDDD");
+            Interface::outputAClearResult(
+                    "second 1527/2242 code is:",
+                    secondDecodeResult,
+                    "AAAAAAAADDDD");
 
             StringUnit stringUnit;
             std::string diff = stringUnit.compareTwoStrings(firstDecodeResult, secondDecodeResult);
@@ -175,7 +182,7 @@ int Interface::mainMenu() {
             std::cout << diff << std::endl;
             std::cout << secondDecodeResult << std::endl;
 
-            if(diff.find_first_not_of("-") == std::string::npos){
+            if (diff.find_first_not_of("-") == std::string::npos) {
                 std::cout << "(all same)" << std::endl;
             }
 
@@ -183,7 +190,7 @@ int Interface::mainMenu() {
 
         }
 
-        case 51:{//demodulated general code from URH to static 2262/2260 code two times and do diff
+        case 51: {//demodulated general code from URH to static 2262/2260 code two times and do diff
 
             AlgoGeneral decodeGeneral;
 
@@ -201,8 +208,10 @@ int Interface::mainMenu() {
             Interface::outputAClearResult("second static general code is:",
                                           secondDecodeResult, "");
 
-            if(firstDecodeResult.length() != secondDecodeResult.length()){
-                std::cout << "Warning: length is different, it's definitely not same and maybe there's bad decode processing" << std::endl;
+            if (firstDecodeResult.length() != secondDecodeResult.length()) {
+                std::cout
+                        << "Warning: length is different, it's definitely not same and maybe there's bad decode processing"
+                        << std::endl;
             }
 
             StringUnit stringUnit;
@@ -212,14 +221,14 @@ int Interface::mainMenu() {
             std::cout << diff << std::endl;
             std::cout << secondDecodeResult << std::endl;
 
-            if(diff.find_first_not_of("-") == std::string::npos){
+            if (diff.find_first_not_of("-") == std::string::npos) {
                 std::cout << "(all same)" << std::endl;
             }
 
             return 1;
         }
 
-        case 6:{//auto decoding
+        case 6: {//auto decoding
             Algo1527_2242 decodeUnkownTry1527;
             Algo226x decodeUnknownTry2262;
             AlgoGeneral decodeUnknownTryFinal;
@@ -250,34 +259,34 @@ int Interface::mainMenu() {
             std::cout << "\n------\n";
 
 
-
-            for (char _set2262 : test2262Result){
-                if (valid2262Chars.find(_set2262) == valid2262Chars.end()){//isn't in 2262 range
+            for (char _set2262: test2262Result) {
+                if (valid2262Chars.find(_set2262) == valid2262Chars.end()) {//isn't in 2262 range
                     //try1527
                     std::cout << "\nisn't in 2262 range try1527\n";
-                    for (char _set1527 : test1527Result){
-                        if (valid1527Chars.find(_set1527) == valid2262Chars.end()){//isn't in 1527 range
+                    for (char _set1527: test1527Result) {
+                        if (valid1527Chars.find(_set1527) == valid2262Chars.end()) {//isn't in 1527 range
                             //try general
                             std::cout << "\nisn't in 1527 range trygener\n";
-                            for (char _setGenral : testFinalResult){
-                                if (validGeneralChars.find(_setGenral) ==validGeneralChars.end()){//isn't in general range'
+                            for (char _setGenral: testFinalResult) {
+                                if (validGeneralChars.find(_setGenral) ==
+                                    validGeneralChars.end()) {//isn't in general range'
                                     typeResult = "unknown";
                                     break;
-                                }else{//in gerenal range
+                                } else {//in gerenal range
                                     typeResult = "general";
                                     break;
                                 }
                             }
 
                             //try general end
-                        } else if (test1527Result.length() == 14){//is in 1527 range && is 1527 length
+                        } else if (test1527Result.length() == 14) {//is in 1527 range && is 1527 length
                             typeResult = "1527";
                             break;
                         }
                     }
 
                     //try1527end
-                } else if (test2262Result.length() == 14){//is in 2262 range && is 2262 length
+                } else if (test2262Result.length() == 14) {//is in 2262 range && is 2262 length
                     typeResult = "2262";
                     break;
                 }
@@ -288,12 +297,12 @@ int Interface::mainMenu() {
             std::cout << typeResult;
             std::cout << "\n------\n";
 
-            if (typeResult == "1527"){
-                Interface::outputAClearResult("static 1527 code is:",test1527Result, "AAAAAAAAAADDDD");
-            }else if (typeResult == "2262"){
-                Interface::outputAClearResult("static 2262 code is:",test2262Result, "AAAAAAAAAADDDD");
-            }else{
-                Interface::outputAClearResult("NW Mode of the code is:",testFinalResult,"");
+            if (typeResult == "1527") {
+                Interface::outputAClearResult("static 1527 code is:", test1527Result, "AAAAAAAAAADDDD");
+            } else if (typeResult == "2262") {
+                Interface::outputAClearResult("static 2262 code is:", test2262Result, "AAAAAAAAAADDDD");
+            } else {
+                Interface::outputAClearResult("NW Mode of the code is:", testFinalResult, "");
             }
 
             return 1;

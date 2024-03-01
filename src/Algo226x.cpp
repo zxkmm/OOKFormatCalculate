@@ -34,14 +34,6 @@ std::string Algo226x::decode2262FromUrh(std::string stringOf2262WaveformFromUrh)
         ++i;
     }
 
-
-//    //Calculate the average	of the array
-//    int sum = 0;
-//    for (const auto &i: oCodeThatInArray) {
-//        sum += stoi(i);
-//    }
-//    int average = sum / (BIT_NUM_2262 + 1);
-
     //avg
     int sumOfLength = 0;
     for (const auto &i: oCodeThatInArray) {
@@ -55,8 +47,12 @@ std::string Algo226x::decode2262FromUrh(std::string stringOf2262WaveformFromUrh)
     const std::string N = "N";
     const std::string W = "W";
     for (; number < BIT_NUM_2262; number++) {//25 is total 2262 wave numbers,24 is for remove the sync code
+
         //Convert oCodeThatInArray[number] into int
+
         int oCodeThatInArrayInt = stoi(oCodeThatInArray[number]);
+
+
 //        std::cout << "oCodeThatInArrayInt: " << oCodeThatInArrayInt << std::endl;//DBG
         if (std::to_string(oCodeThatInArrayInt).length() <= averageOfLength) {
 //            std::cout << std::to_string(oCodeThatInArrayInt).length() << std::endl;//DBG
