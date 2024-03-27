@@ -15,7 +15,7 @@ Princeton - 2262/1527/2260/2242 Bit-formating calculator / partial decoder, that
 
 ## elegant decoding 2262/1527/2260/2242
 ![screenshot3.png](tools%2Fresources%2Fscreenshot3.png)  
-^ the most stable way to decide binary into 2262/1527/2260/2242  
+^ the most stable way to decode binary into 2262/1527/2260/2242  
   
 ## work with URH and take efforts irl
 https://user-images.githubusercontent.com/24917424/192080873-70d0535c-4e15-4c5a-8465-7bbb75ffa4ea.MP4
@@ -76,7 +76,7 @@ If you are trying to brute-force an OOK device, please try these project below:
 [PortapackMayhem](https://github.com/eried/portapack-mayhem)  
 [2262Scan](https://github.com/zxkmm/2262Scan)   
 [flipper-unleashed](https://github.com/DarkFlippers/unleashed-firmware)    
-[flipper-xtreme](https://github.com/Flipper-XFW/Xtreme-Firmware)
+[Flipper Momentum](https://github.com/Next-Flip/Momentum-Firmware) former known as [flipper-xtreme](https://github.com/Flipper-XFW/Xtreme-Firmware)
 # requirements
 C++11 or Python 3 or both
 # i18n
